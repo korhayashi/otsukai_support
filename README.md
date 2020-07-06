@@ -1,9 +1,13 @@
-## バージョン情報
-- Ruby 2.6.5
-- Rails 5.2.4
+# おつかいサポート
 
-## カタログ設計
-https://docs.google.com/spreadsheets/d/1Z8jvTAgRO9P8O4tkFIJToEulTKb-1MTZ_FGUL5Qpb6A/edit#gid=0
+## 概要
+買い物代行を頼みたい人と、隙間時間に買い物代行を行いお金を稼ぎたい人のマッチングサービスです。
+
+## コンセプト
+ウーバーイーツのなんの買い物にも使えるバージョン。メモを渡しておつかいを頼むイメージ。
+
+## バージョン情報
+Ruby 2.6.5 Rails 5.2.4
 
 ## 機能一覧
 - 会員登録
@@ -14,6 +18,9 @@ https://docs.google.com/spreadsheets/d/1Z8jvTAgRO9P8O4tkFIJToEulTKb-1MTZ_FGUL5Qp
 - カスタマーマイページ
 - 配達員マイページ
 - 配達員評価
+
+## カタログ設計
+https://docs.google.com/spreadsheets/d/1Z8jvTAgRO9P8O4tkFIJToEulTKb-1MTZ_FGUL5Qpb6A/edit#gid=0
 
 ## テーブル定義書
 https://docs.google.com/spreadsheets/d/1hvv6VhIvBp_tdaEnjhXd0LNBYMq6Cr9I7Svf0pDRgCQ/edit#gid=0
