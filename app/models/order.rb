@@ -2,13 +2,16 @@
 #
 # Table name: orders
 #
-#  id          :bigint           not null, primary key
-#  content     :text             not null
-#  deadline    :datetime         not null
-#  note        :text
-#  status      :integer          default(0), not null
-#  courier_id  :integer
-#  customer_id :integer          not null
+#  id             :bigint           not null, primary key
+#  completed_date :datetime
+#  content        :text             not null
+#  deadline       :datetime         not null
+#  note           :text
+#  status         :integer          default("依頼中"), not null
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  courier_id     :integer
+#  customer_id    :integer          not null
 #
 # Indexes
 #
@@ -22,4 +25,10 @@
 #
 class Order < ApplicationRecord
   belongs_to :user, optional: true
+
+  enum status: {
+    依頼中: 0,
+    配達員決定: 1,
+    配達完了: 2
+  }
 end

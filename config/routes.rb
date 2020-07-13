@@ -21,12 +21,12 @@
 #                           POST   /users/confirmation(.:format)                                                            devise/confirmations#create
 #                      root GET    /                                                                                        contents#index
 #                      home GET    /home(.:format)                                                                          contents#home
+#            history_orders GET    /orders/history(.:format)                                                                orders#history
 #                    orders POST   /orders(.:format)                                                                        orders#create
 #                 new_order GET    /orders/new(.:format)                                                                    orders#new
-#                     order GET    /orders/:id(.:format)                                                                    orders#show
-#         contents_customer GET    /contents/customers/:id(.:format)                                                        contents/customers#show
-#         contents_couriers GET    /contents/couriers(.:format)                                                             contents/couriers#index
-#          contents_courier GET    /contents/couriers/:id(.:format)                                                         contents/couriers#show
+#                edit_order GET    /orders/:id/edit(.:format)                                                               orders#edit
+#                     order PATCH  /orders/:id(.:format)                                                                    orders#update
+#                           PUT    /orders/:id(.:format)                                                                    orders#update
 #         letter_opener_web        /letter_opener                                                                           LetterOpenerWeb::Engine
 #        rails_service_blob GET    /rails/active_storage/blobs/:signed_id/*filename(.:format)                               active_storage/blobs#show
 # rails_blob_representation GET    /rails/active_storage/representations/:signed_blob_id/:variation_key/*filename(.:format) active_storage/representations#show
@@ -45,11 +45,10 @@ Rails.application.routes.draw do
   devise_for :users
   root 'contents#index'
   get '/home', to: 'contents#home'
-  resources :orders, only: [:new, :create, :show]
-
-  namespace :contents do
-    resources :customers, only: [:show]
-    resources :couriers, only: [:index, :show]
+  resources :orders, only: [:new, :create, :edit, :update] do
+    collection do
+      get :history
+    end
   end
 
   if Rails.env.development?

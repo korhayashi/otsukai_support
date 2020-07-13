@@ -34,11 +34,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
 
-  # enum category: {
-  #   customer: 0,
-  #   courier: 1,
-  #   both: 2
-  # }
+  enum category: {
+    カスタマー: 0,
+    配達員: 1,
+    # 両方: 2
+  }
 
   has_many :orders
 end

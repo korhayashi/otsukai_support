@@ -1,5 +1,5 @@
 <div class="menu_view">
-  <% if current_user.category == 0 %>
+  <% if current_user.category == 'カスタマー' %>
     <div class="menu_new_order">
       <%= link_to '新規買い物依頼', new_order_path %>
     </div>
@@ -7,7 +7,7 @@
       <%= link_to '会員情報編集', edit_user_registration_path %>
     </div>
     <div class="menu_shopping_list">
-      <%= link_to '買い物履歴', contents_customer_path(current_user.id) %>
+      <%= link_to '買い物履歴', history_orders_path %>
     </div>
   <% elsif current_user.category == 1 %>
     <div class="menu_order_list">
@@ -17,7 +17,7 @@
       <%= link_to '会員情報編集', edit_user_registration_path %>
     </div>
     <div class="menu_delivery_list">
-      <%= link_to '配達履歴', contents_courier_path(current_user.id) %>
+      <%= link_to '配達履歴', history_orders_path %>
     </div>
   <% end %>
 </div>

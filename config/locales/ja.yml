@@ -231,10 +231,16 @@ ja:
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
     pm: 午後
-  enums:
-    user:
-      category:
-        default: "--"
-        customer: "カスタマー"
-        courier: "配達員"
-        both: "カスタマー兼配達員"
+  # enums:
+  #   user:
+  #     category:
+  #       default: "--"
+  #       customer: "カスタマー"
+  #       courier: "配達員"
+  #       both: "カスタマー兼配達員"
+  #   order:
+  #     status:
+  #       default: "--"
+  #       requesting: "依頼中"
+  #       deliverer_decision: "配達員決定"
+  #       completed: "配達完了"

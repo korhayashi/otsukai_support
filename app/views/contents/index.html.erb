@@ -10,19 +10,23 @@
   </div>
 
   <div class="requestings">
-    <% if current_user.category == 0 %>
+    <% if current_user.category == 'カスタマー' %>
       <% if @customer_orders0.present? %>
         <% @customer_orders0.each do |order| %>
-          <div class="requesting">
-            <p>依頼中の買い物</p>
-            <div class="requesting_text">
-              現在配達員を探しています。<br>
-              依頼期限：<%= l order.deadline, format: :short %>
+          <% now = DateTime.now %>
+          <% deadline = order.deadline.to_datetime %>
+          <% if deadline > now %>
+            <div class="requesting">
+              <p>依頼中の買い物</p>
+              <div class="requesting_text">
+                現在配達員を探しています。<br>
+                依頼期限：<%= l order.deadline, format: :short %>
+              </div>
+              <div class="requesting_detail_btn">
+                <%= link_to '依頼詳細', edit_order_path(order.id) %>
+              </div>
             </div>
-            <div class="requesting_detail_btn">
-              <%= link_to '依頼詳細', order_path(order.id) %>
-            </div>
-          </div>
+          <% end %>
         <% end %>
       <% end %>
       <% if @customer_orders1.present? %>
@@ -35,7 +39,7 @@
               <%= courier.family_name %>が買い物・配達に伺います。
             </div>
             <div class="requesting_detail_btn">
-              <%= link_to '依頼詳細', order_path(order.id) %>
+              <%= link_to '依頼詳細', edit_order_path(order.id) %>
             </div>
             <div class="requesting_message_btn">
               配達員に連絡する
@@ -43,7 +47,7 @@
           </div>
         <% end %>
       <% end %>
-    <% elsif current_user.category == 1 %>
+    <% elsif current_user.category == '配達員' %>
       <% if @courier_orders.present? %>
         <% @courier_orders.each do |order| %>
           <% customer = User.find(order.customer_id) %>
@@ -53,7 +57,7 @@
               <%= customer.family_name %><%= customer.first_name %>様の買い物依頼
             </div>
             <div class="requesting_detail_btn">
-              <%= link_to '依頼詳細', order_path(order.id) %>
+              <%= link_to '依頼詳細', edit_order_path(order.id) %>
             </div>
             <div class="requesting_message_btn">
               カスタマーに連絡する
@@ -65,7 +69,7 @@
   </div>
 
   <div class="mypage_menu_btns">
-    <% if current_user.category == 0 %>
+    <% if current_user.category == 'カスタマー' %>
       <div class="mypage_menu_new_order">
         <%= link_to '新規買い物依頼', new_order_path %>
       </div>
@@ -73,9 +77,9 @@
         <%= link_to '会員情報編集', edit_user_registration_path %>
       </div>
       <div class="mypage_menu_shopping_list">
-        <%= link_to '買い物履歴', contents_customer_path(current_user.id) %>
+        <%= link_to '買い物履歴', history_orders_path %>
       </div>
-    <% elsif current_user.category == 1 %>
+    <% elsif current_user.category == '配達員' %>
       <div class="mypage_menu_order_list">
         <%= link_to '依頼一覧', content_couriers_path %>
       </div>
@@ -83,7 +87,7 @@
         <%= link_to '会員情報編集', edit_user_registration_path %>
       </div>
       <div class="mypage_menu_delivery_list">
-        <%= link_to '配達履歴', contents_courier_path(current_user.id) %>
+        <%= link_to '配達履歴', history_orders_path %>
       </div>
     <% end %>
   </div>

@@ -1,0 +1,51 @@
+<div class="order_detail">
+  <table>
+    <tr>
+      <th>買い物リスト</th>
+      <td><%= @order_content %></td>
+    </tr>
+    <tr>
+      <th>備考</th>
+      <td><%= @order.note %></td>
+    </tr>
+    <tr>
+      <th>配送先情報</th>
+      <td>
+        〒<%= @order_customer.postal_code %><br>
+        <%= @order_customer.address %><br>
+        <%= @order_customer.phone_number %>
+        <p><%= @order_customer.family_name %><%= @order_customer.first_name %>様</p>
+      </td>
+    </tr>
+    <tr>
+      <th>ステータス</th>
+      <td><%= @order.status %></td>
+    </tr>
+    <% if defined? @order_courier %>
+      <tr>
+        <th>配達員</th>
+        <td><%= @order_courier.family_name %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <% if @order.status == '依頼中' || @order.status == '配達員決定' %>
+        <th>終了期限</th>
+        <td><%= l @order.deadline, format: :short %></td>
+      <% elsif @order.status == '配達完了' %>
+        <th>配達完了日時</th>
+        <td><%= l @order.completed_date, format: :short %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <th>依頼日時</th>
+      <td><%= l @order.created_at, format: :short %></td>
+    </tr>
+  </table>
+
+  <% if current_user.category == '配達員' %>
+    <%= form_with(model: @order, local: true) do |f| %>
+      <%= f.hidden_field :status, value: '配達員決定' %>
+      <%= f.submit '依頼受託' %>
+    <% end %>
+  <% end %>
+</div>
