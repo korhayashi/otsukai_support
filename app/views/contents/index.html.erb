@@ -17,10 +17,10 @@
             <p>依頼中の買い物</p>
             <div class="requesting_text">
               現在配達員を探しています。<br>
-              依頼期限：<%= order.deadline %>
+              依頼期限：<%= l order.deadline, format: :short %>
             </div>
             <div class="requesting_detail_btn">
-              <%= link_to '依頼詳細', contents_order_path %>
+              <%= link_to '依頼詳細', order_path(order.id) %>
             </div>
           </div>
         <% end %>
@@ -35,7 +35,7 @@
               <%= courier.family_name %>が買い物・配達に伺います。
             </div>
             <div class="requesting_detail_btn">
-              <%= link_to '依頼詳細', contents_order_path %>
+              <%= link_to '依頼詳細', order_path(order.id) %>
             </div>
             <div class="requesting_message_btn">
               配達員に連絡する
@@ -53,7 +53,7 @@
               <%= customer.family_name %><%= customer.first_name %>様の買い物依頼
             </div>
             <div class="requesting_detail_btn">
-              <%= link_to '依頼詳細', contents_order_path %>
+              <%= link_to '依頼詳細', order_path(order.id) %>
             </div>
             <div class="requesting_message_btn">
               カスタマーに連絡する
@@ -67,7 +67,7 @@
   <div class="mypage_menu_btns">
     <% if current_user.category == 0 %>
       <div class="mypage_menu_new_order">
-        <%= link_to '新規買い物依頼', new_contents_order_path %>
+        <%= link_to '新規買い物依頼', new_order_path %>
       </div>
       <div class="mypage_menu_user_edit">
         <%= link_to '会員情報編集', edit_user_registration_path %>

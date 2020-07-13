@@ -21,9 +21,9 @@
 #                           POST   /users/confirmation(.:format)                                                            devise/confirmations#create
 #                      root GET    /                                                                                        contents#index
 #                      home GET    /home(.:format)                                                                          contents#home
-#           contents_orders POST   /contents/orders(.:format)                                                               contents/orders#create
-#        new_contents_order GET    /contents/orders/new(.:format)                                                           contents/orders#new
-#            contents_order GET    /contents/orders/:id(.:format)                                                           contents/orders#show
+#                    orders POST   /orders(.:format)                                                                        orders#create
+#                 new_order GET    /orders/new(.:format)                                                                    orders#new
+#                     order GET    /orders/:id(.:format)                                                                    orders#show
 #         contents_customer GET    /contents/customers/:id(.:format)                                                        contents/customers#show
 #         contents_couriers GET    /contents/couriers(.:format)                                                             contents/couriers#index
 #          contents_courier GET    /contents/couriers/:id(.:format)                                                         contents/couriers#show
@@ -45,8 +45,9 @@ Rails.application.routes.draw do
   devise_for :users
   root 'contents#index'
   get '/home', to: 'contents#home'
+  resources :orders, only: [:new, :create, :show]
+
   namespace :contents do
-    resources :orders, only: [:new, :create, :show]
     resources :customers, only: [:show]
     resources :couriers, only: [:index, :show]
   end

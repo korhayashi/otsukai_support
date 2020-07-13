@@ -2,7 +2,7 @@ ja:
   activerecord:
     models:
       user: ユーザー
-      # order:　依頼情報
+      order: 依頼情報
       # conversation: 会話情報
       # message: メッセージ情報
     attributes:

@@ -6,7 +6,7 @@
 #  content     :text             not null
 #  deadline    :datetime         not null
 #  note        :text
-#  status      :integer          not null
+#  status      :integer          default(0), not null
 #  courier_id  :integer
 #  customer_id :integer          not null
 #
@@ -21,5 +21,5 @@
 #  fk_rails_...  (customer_id => users.id)
 #
 class Order < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true
 end

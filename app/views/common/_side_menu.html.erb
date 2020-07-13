@@ -1,7 +1,7 @@
 <div class="menu_view">
   <% if current_user.category == 0 %>
     <div class="menu_new_order">
-      <%= link_to '新規買い物依頼', new_contents_order_path %>
+      <%= link_to '新規買い物依頼', new_order_path %>
     </div>
     <div class="menu_user_edit">
       <%= link_to '会員情報編集', edit_user_registration_path %>
