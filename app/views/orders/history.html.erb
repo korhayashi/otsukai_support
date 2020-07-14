@@ -32,11 +32,11 @@
           <% end %>
           <tr>
             <th>配達完了日時</th>
-            <td><%= l @order.completed_date, format: :short %></td>
+            <td><%= l order.completed_date, format: :short %></td>
           </tr>
           <tr>
             <th>依頼日時</th>
-            <td><%= l @order.created_at, format: :short %></td>
+            <td><%= l order.created_at, format: :short %></td>
           </tr>
         </table>
       </div>

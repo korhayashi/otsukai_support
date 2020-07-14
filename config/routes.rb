@@ -45,7 +45,7 @@ Rails.application.routes.draw do
   devise_for :users
   root 'contents#index'
   get '/home', to: 'contents#home'
-  resources :orders, only: [:new, :create, :edit, :update] do
+  resources :orders, only: [:index, :new, :create, :edit, :update] do
     collection do
       get :history
     end

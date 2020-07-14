@@ -43,9 +43,17 @@
   </table>
 
   <% if current_user.category == '配達員' %>
-    <%= form_with(model: @order, local: true) do |f| %>
-      <%= f.hidden_field :status, value: '配達員決定' %>
-      <%= f.submit '依頼受託' %>
+    <% if @order.status == '依頼中' %>
+      <%= form_with(model: @order, local: true) do |f| %>
+        <%= f.hidden_field :status, value: '配達員決定' %>
+        <%= f.submit '依頼受託' %>
+      <% end %>
+    <% elsif @order.status == '配達員決定' %>
+      <%= form_with(model: @order, local: true) do |f| %>
+        <%= f.hidden_field :status, value: '配達完了' %>
+        <%= f.hidden_field :completed_date, value: DateTime.now %>
+        <%= f.submit '配達完了' %>
+      <% end %>
     <% end %>
   <% end %>
 </div>

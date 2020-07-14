@@ -1,4 +1,20 @@
 class OrdersController < ApplicationController
+  before_action :set_order, only: [:edit, :update]
+
+  def index
+    if params[:sort_pass]
+      @orders =
+      if params[:sort] == 'created_at'
+        Order.where(status: 0).order(created_at: :desc)
+      elsif params[:sort] == 'deadline'
+        Order.where(status: 0).order(deadline: :asc)
+      end
+
+      render :index
+    end
+    @orders = Order.where(status: 0).where('deadline > ?', DateTime.now).order(created_at: :desc)
+  end
+
   def new
     @order = Order.new
   end
@@ -21,7 +37,12 @@ class OrdersController < ApplicationController
   end
 
   def update
-
+    @order.courier_id = current_user.id
+    if @order.update(order_params)
+      redirect_to root_path
+    else
+      render :edit
+    end
   end
 
   def history
@@ -37,6 +58,10 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:content, :note, :status, :deadline, :customer_id, :courier_id)
+    params.require(:order).permit(:content, :note, :status, :deadline, :completed_date, :customer_id, :courier_id)
+  end
+
+  def set_order
+    @order = Order.find(params[:id])
   end
 end
