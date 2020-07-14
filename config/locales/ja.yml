@@ -2,7 +2,7 @@ ja:
   activerecord:
     models:
       user: ユーザー
-      # order:　依頼情報
+      order: 依頼情報
       # conversation: 会話情報
       # message: メッセージ情報
     attributes:
@@ -231,10 +231,16 @@ ja:
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
     pm: 午後
-  enums:
-    user:
-      category:
-        default: "--"
-        customer: "カスタマー"
-        courier: "配達員"
-        both: "カスタマー兼配達員"
+  # enums:
+  #   user:
+  #     category:
+  #       default: "--"
+  #       customer: "カスタマー"
+  #       courier: "配達員"
+  #       both: "カスタマー兼配達員"
+  #   order:
+  #     status:
+  #       default: "--"
+  #       requesting: "依頼中"
+  #       deliverer_decision: "配達員決定"
+  #       completed: "配達完了"

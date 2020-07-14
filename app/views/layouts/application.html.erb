@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>OtsukaiSupport</title>
+    <title>おつかいサポート</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,12 @@
   </head>
 
   <body>
+    <%= link_to root_path do %>
+      おつかいサポート
+    <% end %>
+    <% if user_signed_in? %>
+      <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+    <% end %>
     <% if notice %>
       <p class="alert alert-notice"><%= notice %></p>
     <% end %>

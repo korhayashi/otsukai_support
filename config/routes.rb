@@ -21,14 +21,12 @@
 #                           POST   /users/confirmation(.:format)                                                            devise/confirmations#create
 #                      root GET    /                                                                                        contents#index
 #                      home GET    /home(.:format)                                                                          contents#home
-#                  contents GET    /contents(.:format)                                                                      contents#index
-#                           POST   /contents(.:format)                                                                      contents#create
-#               new_content GET    /contents/new(.:format)                                                                  contents#new
-#              edit_content GET    /contents/:id/edit(.:format)                                                             contents#edit
-#                   content GET    /contents/:id(.:format)                                                                  contents#show
-#                           PATCH  /contents/:id(.:format)                                                                  contents#update
-#                           PUT    /contents/:id(.:format)                                                                  contents#update
-#                           DELETE /contents/:id(.:format)                                                                  contents#destroy
+#            history_orders GET    /orders/history(.:format)                                                                orders#history
+#                    orders POST   /orders(.:format)                                                                        orders#create
+#                 new_order GET    /orders/new(.:format)                                                                    orders#new
+#                edit_order GET    /orders/:id/edit(.:format)                                                               orders#edit
+#                     order PATCH  /orders/:id(.:format)                                                                    orders#update
+#                           PUT    /orders/:id(.:format)                                                                    orders#update
 #         letter_opener_web        /letter_opener                                                                           LetterOpenerWeb::Engine
 #        rails_service_blob GET    /rails/active_storage/blobs/:signed_id/*filename(.:format)                               active_storage/blobs#show
 # rails_blob_representation GET    /rails/active_storage/representations/:signed_blob_id/:variation_key/*filename(.:format) active_storage/representations#show
@@ -47,7 +45,11 @@ Rails.application.routes.draw do
   devise_for :users
   root 'contents#index'
   get '/home', to: 'contents#home'
-  resources :contents
+  resources :orders, only: [:index, :new, :create, :edit, :update] do
+    collection do
+      get :history
+    end
+  end
 
   if Rails.env.development?
   mount LetterOpenerWeb::Engine, at: "/letter_opener"
