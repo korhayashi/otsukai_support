@@ -32,8 +32,6 @@ class OrdersController < ApplicationController
   def edit
     @order = Order.find(params[:id])
     @order_content = @order.content.gsub(/\r\n|\r|\n/, '<br>').html_safe
-    @order_customer = User.find(@order.customer_id)
-    @order_courier = User.find(@order.courier_id) if @order.courier_id.present?
   end
 
   def update
