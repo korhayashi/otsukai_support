@@ -19,19 +19,31 @@ class OrdersController < ApplicationController
     @order = Order.new
   end
 
+  def confirm
+    @order = Order.new(order_params)
+    @order_content = @order.content.gsub(/\r\n|\r|\n/, '<br>').html_safe
+    @order_note = @order.note.gsub(/\r\n|\r|\n/, '<br>').html_safe
+    render :new if @order.invalid?
+  end
+
   def create
     @order = Order.new(order_params)
     @order.customer_id = current_user.id
-    if @order.save
-      redirect_to root_path
-    else
+    if params[:back]
       render :new
+    else
+      if @order.save
+        redirect_to root_path
+      else
+        render :new
+      end
     end
   end
 
   def edit
     @order = Order.find(params[:id])
     @order_content = @order.content.gsub(/\r\n|\r|\n/, '<br>').html_safe
+    @order_note = @order.note.gsub(/\r\n|\r|\n/, '<br>').html_safe
   end
 
   def update

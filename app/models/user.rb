@@ -41,4 +41,11 @@ class User < ApplicationRecord
   }
 
   has_many :orders
+
+  validates :category, acceptance: true
+  validates :family_name, presence: true, length: { in: 1..20 }
+  validates :first_name, presence: true, length: { in: 1..20 }
+  validates :postal_code, presence: true, length: { in: 1..255 }
+  validates :address, presence: true, length: { in: 1..255 }
+  validates :phone_number, presence: true, length: { in: 1..13 }
 end

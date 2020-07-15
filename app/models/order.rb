@@ -34,4 +34,13 @@ class Order < ApplicationRecord
     配達員決定: 1,
     配達完了: 2
   }
+
+  validates :content, presence: true, length: { minimum: 1 }
+  validate :check_deadline
+
+  def check_deadline
+    if deadline <= DateTime.now
+      errors.add(:deadline, 'が現在の日時より前に設定されています')
+    end
+  end
 end
