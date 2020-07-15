@@ -1,6 +1,7 @@
 # == Route Map
 #
 #                    Prefix Verb   URI Pattern                                                                              Controller#Action
+#               rails_admin        /admin                                                                                   RailsAdmin::Engine
 #          new_user_session GET    /users/sign_in(.:format)                                                                 devise/sessions#new
 #              user_session POST   /users/sign_in(.:format)                                                                 devise/sessions#create
 #      destroy_user_session DELETE /users/sign_out(.:format)                                                                devise/sessions#destroy
@@ -22,6 +23,7 @@
 #                      root GET    /                                                                                        contents#index
 #                      home GET    /home(.:format)                                                                          contents#home
 #            history_orders GET    /orders/history(.:format)                                                                orders#history
+#            confirm_orders POST   /orders/confirm(.:format)                                                                orders#confirm
 #                    orders GET    /orders(.:format)                                                                        orders#index
 #                           POST   /orders(.:format)                                                                        orders#create
 #                 new_order GET    /orders/new(.:format)                                                                    orders#new
@@ -38,6 +40,18 @@
 # update_rails_disk_service PUT    /rails/active_storage/disk/:encoded_token(.:format)                                      active_storage/disk#update
 #      rails_direct_uploads POST   /rails/active_storage/direct_uploads(.:format)                                           active_storage/direct_uploads#create
 #
+# Routes for RailsAdmin::Engine:
+#   dashboard GET         /                                      rails_admin/main#dashboard
+#       index GET|POST    /:model_name(.:format)                 rails_admin/main#index
+#         new GET|POST    /:model_name/new(.:format)             rails_admin/main#new
+#      export GET|POST    /:model_name/export(.:format)          rails_admin/main#export
+# bulk_delete POST|DELETE /:model_name/bulk_delete(.:format)     rails_admin/main#bulk_delete
+# bulk_action POST        /:model_name/bulk_action(.:format)     rails_admin/main#bulk_action
+#        show GET         /:model_name/:id(.:format)             rails_admin/main#show
+#        edit GET|PUT     /:model_name/:id/edit(.:format)        rails_admin/main#edit
+#      delete GET|DELETE  /:model_name/:id/delete(.:format)      rails_admin/main#delete
+# show_in_app GET         /:model_name/:id/show_in_app(.:format) rails_admin/main#show_in_app
+#
 # Routes for LetterOpenerWeb::Engine:
 # clear_letters DELETE /clear(.:format)                 letter_opener_web/letters#clear
 # delete_letter DELETE /:id(.:format)                   letter_opener_web/letters#destroy
@@ -53,6 +67,7 @@ Rails.application.routes.draw do
   resources :orders, only: [:index, :new, :create, :edit, :update] do
     collection do
       get :history
+      post :confirm
     end
   end
 

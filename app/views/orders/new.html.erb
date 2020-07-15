@@ -1,6 +1,6 @@
 <div class="new_order">
   <p>買い物メモを作りましょう！</p>
-  <%= form_with(model: @order, local: true) do |f| %>
+  <%= form_with(model: @order, local: true, url: confirm_orders_path) do |f| %>
     <div class="new_order_form_content">
       <%= f.text_area :content %>
     </div>
