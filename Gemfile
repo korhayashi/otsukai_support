@@ -22,6 +22,11 @@ gem 'devise-i18n'
 # モデル、ルーティング表記
 gem 'annotate'
 
+# アドミン
+gem 'rails_admin', '~> 2.0'
+# アクセス制限
+gem 'cancancan'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end

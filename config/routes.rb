@@ -46,6 +46,7 @@
 #               GET    /:id/attachments/:file(.:format) letter_opener_web/letters#attachment
 
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
   root 'contents#index'
   get '/home', to: 'contents#home'
