@@ -33,6 +33,7 @@ class OrdersController < ApplicationController
       render :new
     else
       if @order.save
+        OrderConfirmationMailer.order_confirmation(@order).deliver
         redirect_to root_path
       else
         render :new
@@ -49,6 +50,9 @@ class OrdersController < ApplicationController
   def update
     @order.courier_id = current_user.id
     if @order.update(order_params)
+      if params[:commit] == '依頼受託'
+        DelivererDecisionMailer.deliverer_decision(@order).deliver
+      end
       redirect_to root_path
     else
       render :edit

@@ -1,0 +1,26 @@
+<h3>配達員が決定しました</h3>
+<div class="order_confirmation_body">
+  <p><%= @order.customer.family_name %><%= @order.customer.first_name %>様</p>
+  この度は買い物依頼をいただきありがとうございます。<br>
+  配達員が決定しました。<br>
+  <%= @order.courier.family_name %><%= @order.courier.first_name %>がこれから買い物・配達に伺います。<br>
+  受け取り時配達員に代金＋手数料(¥500)をお支払いください。<br>
+  下記内容にて依頼を受け付けました。<br>
+  また、会員マイページにて配達員とのチャットが可能です。何か御座いましたらご利用ください。<br>
+  <div class="order_confirmation_order">
+    <table>
+      <tr>
+        <th>買い物リスト</th>
+        <td><%= @order_content %></td>
+      </tr>
+      <tr>
+        <th>備考</th>
+        <td><%= @order_note %></td>
+      </tr>
+      <tr>
+        <th>終了期限</th>
+        <td><%= l @order.deadline, format: :short %></td>
+      </tr>
+    </table>
+  </div>
+</div>

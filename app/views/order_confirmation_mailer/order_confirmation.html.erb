@@ -1,0 +1,25 @@
+<h3>買い物依頼を受け付けました</h3>
+<div class="order_confirmation_body">
+  <p><%= @order.customer.family_name %><%= @order.customer.first_name %>様</p>
+  この度は買い物依頼をいただきありがとうございます。<br>
+  下記内容にて依頼を受け付けました。<br>
+  <div class="order_confirmation_order">
+    <table>
+      <tr>
+        <th>買い物リスト</th>
+        <td><%= @order_content %></td>
+      </tr>
+      <tr>
+        <th>備考</th>
+        <td><%= @order_note %></td>
+      </tr>
+      <tr>
+        <th>終了期限</th>
+        <td><%= l @order.deadline, format: :short %></td>
+      </tr>
+    </table>
+  </div>
+  配達員が確定しましたら再度連絡いたします。<br>
+  終了期限までに配達員が見つからない場合は注文キャンセルとなりますのでご了承ください。<br>
+  受け取り時の代金＋手数料(¥500)をご用意してお待ちください。
+</div>
