@@ -27,6 +27,9 @@ gem 'rails_admin', '~> 2.0'
 # アクセス制限
 gem 'cancancan'
 
+# font-awesome
+gem 'font-awesome-sass', '~> 5.4.1'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
