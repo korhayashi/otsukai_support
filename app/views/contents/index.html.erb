@@ -31,18 +31,17 @@
       <% end %>
       <% if @customer_orders1.present? %>
         <% @customer_orders1.each do |order| %>
-          <% courier = User.find(order.courier_id) %>
           <div class="requesting">
             <p>依頼中の買い物</p>
             <div class="requesting_text">
               配達員が決まりました！<br>
-              <%= courier.family_name %>が買い物・配達に伺います。
+              <%= order.courier.family_name %>が買い物・配達に伺います。
             </div>
             <div class="requesting_detail_btn">
               <%= link_to '依頼詳細', edit_order_path(order.id) %>
             </div>
             <div class="requesting_message_btn">
-              配達員に連絡する
+              <%= link_to '配達員に連絡する', conversations_path(sender_id: current_user.id, recipient_id: order.courier_id, order_id: order.id), method: :post %>
             </div>
           </div>
         <% end %>
@@ -50,17 +49,16 @@
     <% elsif current_user.category == '配達員' %>
       <% if @courier_orders.present? %>
         <% @courier_orders.each do |order| %>
-          <% customer = User.find(order.customer_id) %>
           <div class="requesting">
             <p>受託中の依頼</p>
             <div class="requesting_text">
-              <%= customer.family_name %><%= customer.first_name %>様の買い物依頼
+              <%= order.customer.family_name %><%= order.customer.first_name %>様の買い物依頼
             </div>
             <div class="requesting_detail_btn">
               <%= link_to '依頼詳細', edit_order_path(order.id) %>
             </div>
             <div class="requesting_message_btn">
-              カスタマーに連絡する
+              <%= link_to 'カスタマーに連絡する', conversations_path(sender_id: current_user.id, recipient_id: order.customer_id, order_id: order.id), method: :post %>
             </div>
           </div>
         <% end %>

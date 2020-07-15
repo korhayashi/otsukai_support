@@ -11,20 +11,20 @@
     <tr>
       <th>配送先情報</th>
       <td>
-        〒<%= @order_customer.postal_code %><br>
-        <%= @order_customer.address %><br>
-        <%= @order_customer.phone_number %>
-        <p><%= @order_customer.family_name %><%= @order_customer.first_name %>様</p>
+        〒<%= @order.customer.postal_code %><br>
+        <%= @order.customer.address %><br>
+        <%= @order.customer.phone_number %>
+        <p><%= @order.customer.family_name %><%= @order.customer.first_name %>様</p>
       </td>
     </tr>
     <tr>
       <th>ステータス</th>
       <td><%= @order.status %></td>
     </tr>
-    <% if defined? @order_courier %>
+    <% if @order.courier.present? %>
       <tr>
         <th>配達員</th>
-        <td><%= @order_courier.family_name %></td>
+        <td><%= @order.courier.family_name %></td>
       </tr>
     <% end %>
     <tr>

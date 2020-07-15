@@ -9,11 +9,10 @@
 <div class="orders">
   <% if @orders.present? %>
     <% @orders.each do |order| %>
-    <% customer = User.find(order.customer_id) %>
       <div class="order">
         <div class="order_left">
-          <%= customer.family_name %><%= customer.first_name %>様<br>
-          <%= customer.address %>
+          <%= order.customer.family_name %><%= order.customer.first_name %>様<br>
+          <%= order.customer.address %>
           <p>依頼期限：<%= l order.deadline, format: :short %></p>
         </div>
         <div class="order_right">

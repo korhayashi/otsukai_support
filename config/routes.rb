@@ -22,11 +22,15 @@
 #                      root GET    /                                                                                        contents#index
 #                      home GET    /home(.:format)                                                                          contents#home
 #            history_orders GET    /orders/history(.:format)                                                                orders#history
-#                    orders POST   /orders(.:format)                                                                        orders#create
+#                    orders GET    /orders(.:format)                                                                        orders#index
+#                           POST   /orders(.:format)                                                                        orders#create
 #                 new_order GET    /orders/new(.:format)                                                                    orders#new
 #                edit_order GET    /orders/:id/edit(.:format)                                                               orders#edit
 #                     order PATCH  /orders/:id(.:format)                                                                    orders#update
 #                           PUT    /orders/:id(.:format)                                                                    orders#update
+#     conversation_messages GET    /conversations/:conversation_id/messages(.:format)                                       messages#index
+#                           POST   /conversations/:conversation_id/messages(.:format)                                       messages#create
+#             conversations POST   /conversations(.:format)                                                                 conversations#create
 #         letter_opener_web        /letter_opener                                                                           LetterOpenerWeb::Engine
 #        rails_service_blob GET    /rails/active_storage/blobs/:signed_id/*filename(.:format)                               active_storage/blobs#show
 # rails_blob_representation GET    /rails/active_storage/representations/:signed_blob_id/:variation_key/*filename(.:format) active_storage/representations#show
@@ -49,6 +53,10 @@ Rails.application.routes.draw do
     collection do
       get :history
     end
+  end
+
+  resources :conversations, only: [:create] do
+    resources :messages, only: [:index, :create]
   end
 
   if Rails.env.development?

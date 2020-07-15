@@ -24,7 +24,10 @@
 #  fk_rails_...  (customer_id => users.id)
 #
 class Order < ApplicationRecord
+  has_one :conversation, dependent: :destroy
   belongs_to :user, optional: true
+  belongs_to :customer, foreign_key: :customer_id, class_name: 'User', optional: true
+  belongs_to :courier, foreign_key: :courier_id, class_name: 'User', optional: true
 
   enum status: {
     依頼中: 0,
