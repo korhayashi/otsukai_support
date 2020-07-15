@@ -30,20 +30,7 @@
 #                           PUT    /orders/:id(.:format)                                                                    orders#update
 #     conversation_messages GET    /conversations/:conversation_id/messages(.:format)                                       messages#index
 #                           POST   /conversations/:conversation_id/messages(.:format)                                       messages#create
-#  new_conversation_message GET    /conversations/:conversation_id/messages/new(.:format)                                   messages#new
-# edit_conversation_message GET    /conversations/:conversation_id/messages/:id/edit(.:format)                              messages#edit
-#      conversation_message GET    /conversations/:conversation_id/messages/:id(.:format)                                   messages#show
-#                           PATCH  /conversations/:conversation_id/messages/:id(.:format)                                   messages#update
-#                           PUT    /conversations/:conversation_id/messages/:id(.:format)                                   messages#update
-#                           DELETE /conversations/:conversation_id/messages/:id(.:format)                                   messages#destroy
-#             conversations GET    /conversations(.:format)                                                                 conversations#index
-#                           POST   /conversations(.:format)                                                                 conversations#create
-#          new_conversation GET    /conversations/new(.:format)                                                             conversations#new
-#         edit_conversation GET    /conversations/:id/edit(.:format)                                                        conversations#edit
-#              conversation GET    /conversations/:id(.:format)                                                             conversations#show
-#                           PATCH  /conversations/:id(.:format)                                                             conversations#update
-#                           PUT    /conversations/:id(.:format)                                                             conversations#update
-#                           DELETE /conversations/:id(.:format)                                                             conversations#destroy
+#             conversations POST   /conversations(.:format)                                                                 conversations#create
 #         letter_opener_web        /letter_opener                                                                           LetterOpenerWeb::Engine
 #        rails_service_blob GET    /rails/active_storage/blobs/:signed_id/*filename(.:format)                               active_storage/blobs#show
 # rails_blob_representation GET    /rails/active_storage/representations/:signed_blob_id/:variation_key/*filename(.:format) active_storage/representations#show
@@ -68,8 +55,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :conversations do
-    resources :messages
+  resources :conversations, only: [:create] do
+    resources :messages, only: [:index, :create]
   end
 
   if Rails.env.development?
