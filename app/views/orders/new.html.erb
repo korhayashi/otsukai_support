@@ -1,6 +1,15 @@
 <div class="new_order">
   <p>買い物メモを作りましょう！</p>
   <%= form_with(model: @order, local: true, url: confirm_orders_path) do |f| %>
+    <% if @order.errors.any? %>
+      <div id="error_explanation">
+        <ul>
+        <% @order.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
     <div class="new_order_form_content">
       <%= f.text_area :content %>
     </div>
