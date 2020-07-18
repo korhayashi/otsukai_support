@@ -18,4 +18,16 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:phone_number])
     devise_parameter_sanitizer.permit(:account_update, keys: [:admin])
   end
+
+  def not_authorized_from_customer
+    if current_user.category == 'カスタマー'
+      redirect_to root_path
+    end
+  end
+
+  def not_authorized_from_courier
+    if current_user.category == '配達員'
+      redirect_to root_path
+    end
+  end
 end

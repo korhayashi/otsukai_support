@@ -10,18 +10,23 @@
   </head>
 
   <body>
-    <%= link_to root_path do %>
-      おつかいサポート
-    <% end %>
-    <% if user_signed_in? %>
-      <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-    <% end %>
-    <% if notice %>
-      <p class="alert alert-notice"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p class="alert alert-error"><%= alert %></p>
-    <% end %>
+    <header>
+      <div id="bg_header">
+        <%= link_to root_path, class: 'logo' do %>
+          <%= image_tag 'logo.png', class: 'logo_image' %>
+        <% end %>
+        <%= image_tag 'icon.png', class: 'icon_image' %>
+        <% if user_signed_in? %>
+          <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'btn logout_btn' %>
+        <% end %>
+      </div>
+      <% if notice %>
+        <p class="alert alert-notice"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="alert alert-error"><%= alert %></p>
+        <% end %>
+    </header>
 
     <%= yield %>
   </body>

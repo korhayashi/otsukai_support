@@ -1,3 +1,118 @@
-// Place all the styles related to the orders controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import 'variables';
+
+.order_histories {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  text-align: center;
+}
+
+.order_history {
+  margin: 0 auto;
+  position: relative;
+  font-size: 13px;
+}
+
+.memo_history_image {
+  width: 400px;
+}
+
+.order_history_list {
+  width: 380px;
+  position: absolute;
+  top: 70px;
+  left: -10px;
+}
+
+.order_history_name {
+  margin: 5px 0;
+}
+
+.table_right {
+  padding-right: 20px;
+  text-align: right;
+}
+
+.table_btn {
+  padding-top: 15px;
+  text-align: center;
+}
+
+.note {
+  width: 500px;
+  margin: 0 auto;
+  padding: 28px 20px 30px 20px;
+  font-size: 14px;
+  color: #696969;
+  background-color: $cream;
+  border: solid 1px #e6e6e6;
+  box-shadow: 2px 2px 4px rgba(0,0,0,.1);
+}
+
+.note_content {
+  width: 460px;
+  margin: 0 auto;
+  padding: 10px 5px 7px 10px;
+  background-image:
+  linear-gradient(180deg, rgba(100, 100, 100, 0) 0%, rgba(100, 100, 100, 0) 98%, #2b9988 100%);
+  background-size: 100% 28px;
+  background-color: $cream;
+  line-height: 28px;
+}
+
+.order_detail_note_content table {
+  width: 100%;
+
+  & th {
+    width: 150px;
+    position: relative;
+    vertical-align: baseline;
+  }
+}
+
+.postit_content {
+  width: 100%;
+  height: 30px;
+  padding-right: 20px;
+  position: absolute;
+}
+
+.postit_image {
+  transform: scale(-1, 1);
+}
+
+.postit_content_shopping_list {
+  top: -3px;
+  left: -50px;
+}
+
+.postit_content_note {
+  top: -1px;
+  left: -85px;
+  transform: rotate(8deg);
+}
+
+.postit_content_address {
+  top: -7px;
+  left: -72px;
+}
+
+.postit_content_status {
+  top: -2px;
+  left: -65px;
+}
+
+.postit_content_courier {
+  top: -8px;
+  left: -85px;
+}
+
+.postit_content_deadline, .postit_content_completed_date {
+  top: -2px;
+  left: -70px;
+}
+
+.postit_content_created_at {
+  top: 5px;
+  left: -70px;
+}

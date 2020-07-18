@@ -1,3 +1,108 @@
+@import 'variables';
+
+.top_image {
+  width: 80rem;
+}
+
 .info_images img {
   width: 15rem;
+}
+
+#main_container {
+  display: flex;
+}
+
+.mypage {
+  text-align: center;
+}
+
+.user_icon {
+  // width: 20rem;
+  font-size: 20rem;
+  color: $gray;
+}
+
+.mypage_user_name {
+  margin: 1rem 0;
+  font-size: 1.9rem;
+  font-weight: bold;
+}
+
+.requestings {
+  width: 30rem;
+  margin: 2rem auto;
+}
+
+.requesting {
+  position: relative;
+  font-size: 13px;
+}
+
+.memo_image {
+  width: 300px;
+}
+
+.requesting_content {
+  position: absolute;
+  top: 45px;
+  left: 47px;
+}
+
+.requesting_info {
+  margin-bottom: 0.5rem;
+}
+
+.requesting_text {
+  margin: 1rem 0;
+  color: $red;
+}
+
+.requesting_btn {
+  padding: 0.7rem;
+  display: inline-block;
+  background-color: $brown;
+  color: $bg-color;
+  text-decoration: none;
+  border: 1px dashed #a27d4e;
+  box-shadow: 0 0 0 0.3rem $brown;
+  transition: 0.3s;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.requesting_message_btn {
+  margin-left: 1rem;
+}
+
+.mypage_menu_btn {
+  width: 20rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem 4rem;
+  transition: 0.3s;
+  box-shadow: 0.5rem 0.5rem 0.7rem $lightgray;
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &:active {
+    position: relative;
+    box-shadow: none;
+    top: 0.7rem;
+  }
+}
+
+.mypage_new_order_btn, .mypage_order_list_btn {
+  background: btn_gradation_center($red, #803925);
+}
+
+.mypage_user_edit_btn {
+  background: btn_gradation_center($blue, #557467);
+}
+
+.mypage_shopping_list_btn, .mypage_delivery_list_btn {
+  background: btn_gradation_center($orange, #94752C);
 }

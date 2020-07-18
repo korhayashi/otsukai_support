@@ -1,23 +1,14 @@
-<div class="menu_view">
-  <% if current_user.category == 'カスタマー' %>
-    <div class="menu_new_order">
-      <%= link_to '新規買い物依頼', new_order_path %>
-    </div>
-    <div class="menu_user_edit">
-      <%= link_to '会員情報編集', edit_user_registration_path %>
-    </div>
-    <div class="menu_shopping_list">
-      <%= link_to '買い物履歴', history_orders_path %>
-    </div>
-  <% elsif current_user.category == 1 %>
-    <div class="menu_order_list">
-      <%= link_to '依頼一覧', orders_path %>
-    </div>
-    <div class="menu_shopping_list">
-      <%= link_to '会員情報編集', edit_user_registration_path %>
-    </div>
-    <div class="menu_delivery_list">
-      <%= link_to '配達履歴', history_orders_path %>
-    </div>
-  <% end %>
+<div class="menu_view top_space">
+  <div class="menu_list">
+    <% if current_user.category == 'カスタマー' %>
+        <%= link_to '新規買い物依頼', new_order_path, class: 'btn side_menu_btn menu_btn new_order_btn' %>
+        <%= link_to '会員情報編集', edit_user_registration_path, class: 'btn side_menu_btn menu_btn user_edit_btn' %>
+        <%= link_to '買い物履歴', history_orders_path, class: 'btn side_menu_btn menu_btn shopping_list_btn' %>
+    <% elsif current_user.category == '配達員' %>
+        <%= link_to '依頼一覧', orders_path, class: 'btn side_menu_btn menu_btn order_list_btn' %>
+        <%= link_to '会員情報編集', edit_user_registration_path, class: 'btn side_menu_btn menu_btn user_edit_btn' %>
+        <%= link_to '配達履歴', history_orders_path, class: 'btn side_menu_btn menu_btn delivery_list_btn' %>
+    <% end %>
+  </div>
+  <a href="http://nx.myafi.net/" title="フリーWEB素材Re:vre ◆ 汎用素材、ナチュラル×リアルなデザイン素材を配布しています" target="_blank" class="material">フリーWEB素材 Re:vre</a>
 </div>
