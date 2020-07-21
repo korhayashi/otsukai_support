@@ -1,9 +1,13 @@
+<div id="kirehashi"></div>
+<div class="menu_tilt"></div>
+<%= render 'common/menu_btn' %>
+
 <div id="main_container" class="flex">
   <%= render 'common/side_menu' %>
 
   <div id="bg_main" class="top_space">
     <div class="form_container">
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'user_form' }) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
         <div class="field">
           <%= f.label :family_name, 'お名前', class: 'form_info' %><br />
@@ -55,7 +59,7 @@
         </div>
 
         <div class="actions">
-          <%= f.submit t('.update') %>
+          <%= f.submit t('.update'), class: 'btn common_btn user_submit_btn' %>
         </div>
       <% end %>
 
@@ -63,7 +67,7 @@
 
       <h3><%= t('.cancel_my_account') %></h3>
 
-      <p><%= button_to t('.cancel_my_account'), registration_path(resource_name), data: { confirm: t('.are_you_sure') }, method: :delete %></p>
+      <div class="actions"><%= button_to t('.cancel_my_account'), registration_path(resource_name), data: { confirm: t('.are_you_sure') }, method: :delete, class: 'btn common_btn user_submit_btn' %></div>
     </div>
   </div>
 </div>

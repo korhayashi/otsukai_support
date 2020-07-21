@@ -1,26 +1,26 @@
 @import 'variables';
 
-.order_histories {
-  width: 100%;
-  margin: 0 auto;
+.order_histories, .orders {
+  width: 90rem;
   display: flex;
+  flex-wrap: wrap;
   text-align: center;
 }
 
-.order_history {
+.order_history, .order {
   margin: 0 auto;
   position: relative;
   font-size: 13px;
 }
 
-.memo_history_image {
-  width: 400px;
+.memo_history_image, .memo_order_list_image {
+  width: 350px;
 }
 
-.order_history_list {
-  width: 380px;
+.order_history_list, .order_table {
+  width: 350px;
   position: absolute;
-  top: 70px;
+  top: 45px;
   left: -10px;
 }
 
@@ -38,9 +38,36 @@
   text-align: center;
 }
 
+.new_order_form_address {
+  margin: 0 auto;
+  padding: 3rem 0;
+  width: 30rem;
+  font-size: 1.5rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 1rem;
+}
+
+.new_order_form_submit {
+  text-align: center;
+}
+
+.new_order_form_submit .new_order_form_btn {
+  padding: 0.7rem 3rem;
+}
+
+.confirm_btn_area {
+  margin-top: 10rem;
+}
+
+.confirm .done_btn,
+.confirm .back_btn {
+  padding: 0.5rem 2rem;
+}
+
 .note {
   width: 500px;
-  margin: 0 auto;
+  margin: 0 auto 10rem auto;
   padding: 28px 20px 30px 20px;
   font-size: 14px;
   color: #696969;
@@ -115,4 +142,38 @@
 .postit_content_created_at {
   top: 5px;
   left: -70px;
+}
+
+.note_btn_area {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.confirm {
+  text-align: center;
+
+  table {
+    margin: 0 auto;
+    padding: 5rem 0;
+    width: 40rem;
+    font-size: 1.4rem;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 1rem;
+  }
+
+  th {
+    width: 15rem;
+  }
+}
+
+.memo_submit_btn {
+  background-color: #fff;
+}
+
+.requestings {
+  width: 80rem;
+}
+
+.sort {
+  margin-bottom: 5rem;
 }

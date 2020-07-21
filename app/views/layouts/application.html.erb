@@ -10,24 +10,38 @@
   </head>
 
   <body>
-    <header>
-      <div id="bg_header">
-        <%= link_to root_path, class: 'logo' do %>
-          <%= image_tag 'logo.png', class: 'logo_image' %>
+    <div class="container">
+      <header>
+        <% if user_signed_in? %>
+          <%= link_to home_path, class: 'logo' do %>
+            <%= image_tag 'logo.png', class: 'logo_image' %>
+          <% end %>
+        <% else %>
+          <%= link_to root_path, class: 'logo' do %>
+            <%= image_tag 'logo.png', class: 'logo_image' %>
+          <% end %>
         <% end %>
         <%= image_tag 'icon.png', class: 'icon_image' %>
         <% if user_signed_in? %>
-          <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'btn logout_btn' %>
+          <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'btn btn_shadow header_btn header_logout_btn' %>
+        <% else %>
+          <%= link_to 'ログイン', new_user_session_path, class: 'btn btn_shadow header_btn login_btn' %>
+          <%= link_to '新規会員登録', new_user_registration_path, class: 'btn btn_shadow header_btn header_signup_btn' %>
         <% end %>
-      </div>
-      <% if notice %>
-        <p class="alert alert-notice"><%= notice %></p>
-      <% end %>
-      <% if alert %>
-        <p class="alert alert-error"><%= alert %></p>
-        <% end %>
-    </header>
+      </header>
 
-    <%= yield %>
+      <%= yield %>
+
+      <footer>
+        <div class="footer_container">
+          <%= link_to '利用規約' %>
+          <div class="vertical_line"></div>
+          <%= link_to 'お問い合わせ' %>
+          <div class="vertical_line"></div>
+          <%= link_to '素材利用元', thanks_path %>
+        </div>
+        <p class="copyright">©2020 おつかいサポート</p>
+      </footer>
+    </div>
   </body>
 </html>

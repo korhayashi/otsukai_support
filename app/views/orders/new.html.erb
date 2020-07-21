@@ -1,3 +1,7 @@
+<div id="kirehashi"></div>
+<div class="menu_tilt"></div>
+<%= render 'common/menu_btn' %>
+
 <div id="main_container" class="flex">
   <%= render 'common/side_menu' %>
 
@@ -51,8 +55,10 @@
           <p><%= current_user.family_name %><%= current_user.first_name %>様</p>
         </div>
 
+        <hr>
+
         <div class="new_order_form_submit">
-          <%= f.submit '依頼する' %>
+          <%= f.submit '依頼する', class: 'btn common_btn btn_shadow_dark' %>
         </div>
       <% end %>
     </div>

@@ -6,22 +6,19 @@ class MessagesController < ApplicationController
 
   def index
     if current_user.id == @conversation.sender_id || current_user.id == @conversation.recipient_id
-      @messages = @conversation.messages
-      if @messages.length > 10
-        @over_ten = true
-        @messages = Message.where(id: @messages[-10..-1].pluck(:id))
-      end
-      if params[:m]
-        @over_ten = false
-        @messages = @conversation.messages
-      end
+      @messages = @conversation.messages.order(:created_at)
       if @messages.last
         @messages.where.not(user_id: current_user.id).update_all(read: true)
       end
-      @messages = @messages.order(:created_at)
+      if params[:m]
+        @over_ten = false
+      elsif @messages.length > 10
+        @over_ten = true
+        @messages = @messages.last(10)
+      end
       @message = @conversation.messages.build
     else
-      redirect_to root_path
+      redirect_to home_path
     end
   end
 
@@ -34,7 +31,7 @@ class MessagesController < ApplicationController
         render 'index'
       end
     else
-      redirect_to root_path
+      redirect_to home_path
     end
   end
 

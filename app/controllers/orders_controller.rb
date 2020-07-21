@@ -36,7 +36,7 @@ class OrdersController < ApplicationController
     else
       if @order.save
         OrderConfirmationMailer.order_confirmation(@order).deliver
-        redirect_to root_path
+        redirect_to home_path
       else
         render :new
       end
@@ -47,10 +47,16 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @order_content = @order.content.gsub(/\r\n|\r|\n/, '<br>').html_safe
     @order_note = @order.note.gsub(/\r\n|\r|\n/, '<br>').html_safe
-    if current_user.category == 'カスタマー' && current_user.id != @order.customer_id
-      redirect_to root_path
-    elsif current_user.category == '配達員' && current_user.id != @order.courier_id
-      redirect_to root_path
+    if current_user.category == 'カスタマー'
+      if current_user.id != @order.customer_id
+        redirect_to home_path
+      end
+    elsif current_user.category == '配達員'
+      if @order.status == '配達員決定' || @order.status == '配達完了'
+        if current_user.id != @order.courier_id
+          redirect_to home_path
+        end
+      end
     end
   end
 
@@ -60,7 +66,7 @@ class OrdersController < ApplicationController
       if params[:commit] == '依頼受託'
         DelivererDecisionMailer.deliverer_decision(@order).deliver
       end
-      redirect_to root_path
+      redirect_to home_path
     else
       render :edit
     end

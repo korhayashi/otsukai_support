@@ -22,6 +22,7 @@
 #                           POST   /users/confirmation(.:format)                                                            devise/confirmations#create
 #                      root GET    /                                                                                        contents#index
 #                      home GET    /home(.:format)                                                                          contents#home
+#                    thanks GET    /thanks(.:format)                                                                        contents#thanks
 #            history_orders GET    /orders/history(.:format)                                                                orders#history
 #            confirm_orders POST   /orders/confirm(.:format)                                                                orders#confirm
 #                    orders GET    /orders(.:format)                                                                        orders#index
@@ -64,6 +65,7 @@ Rails.application.routes.draw do
   devise_for :users
   root 'contents#index'
   get '/home', to: 'contents#home'
+  get '/thanks', to: 'contents#thanks'
   resources :orders, only: [:index, :new, :create, :edit, :update] do
     collection do
       get :history

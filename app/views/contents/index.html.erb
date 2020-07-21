@@ -1,83 +1,62 @@
-<div id="main_container" class="flex">
-  <%= render 'common/side_menu' %>
+<div id="index_container">
+  <div class="white_image_area">
+    <%= image_tag 'top1.jpg', class: 'index_image white_image' %>
+    <div class="top_black_postit_area">
+      <p class="top_black_postit_content">買い物に出られない・<br>出たくない日のあなたの<br>お買い物をサポート<br>します。</p>
+      <%= image_tag 'tape.png', class: 'tape_image' %>
+    </div>
+    <div class="top_pink_postit_area">
+      <p class="top_pink_postit_content">近所の買い物を<br>代行して<br>すきま時間に<br>収入を得られます。</p>
+      <%= image_tag 'pin.png', class: 'pin_image' %>
+    </div>
+  </div>
 
-  <div id="bg_main" class="mypage top_space">
-    <div class="container">
-      <div class="mypage_user_icon">
-        <%= icon 'fas', 'user-circle', class: 'user_icon' %>
-      </div>
-      <div class="mypage_user_name">
-        <%= current_user.family_name %>
-        <%= current_user.first_name %>様
-      </div>
+  <div class="lets_use_area triangle">
+    <p class="lets_use_content">買い物/配達をしてみましょう！</p>
+  </div>
 
-      <div class="requestings">
-        <% if current_user.category == 'カスタマー' %>
-          <% if @customer_orders0.present? %>
-            <% @customer_orders0.each do |order| %>
-              <% now = DateTime.now %>
-              <% deadline = order.deadline.to_datetime %>
-              <% if deadline > now %>
-                <div class="requesting">
-                  <%= image_tag 'memo1.png',class: 'memo_image' %>
-                  <div class="requesting_content tilt">
-                    <p class="requesting_info">依頼中の買い物</p>
-                    <div class="requesting_text">
-                      現在配達員を探しています。<br>
-                      依頼期限：<%= l order.deadline, format: :short %>
-                    </div>
-                    <%= link_to '依頼詳細', edit_order_path(order.id), class: 'btn requesting_message_btn requesting_btn' %>
-                  </div>
-                </div>
-              <% end %>
-            <% end %>
-          <% end %>
-          <% if @customer_orders1.present? %>
-            <% @customer_orders1.each do |order| %>
-              <div class="requesting">
-                <%= image_tag 'memo1.png', class: 'memo_image' %>
-                <div class="requesting_content tilt">
-                  <p class="requesting_info">依頼中の買い物</p>
-                  <div class="requesting_text">
-                    配達員が決まりました！<br>
-                    <%= order.courier.family_name %>が買い物・配達に伺います。
-                  </div>
-                  <%= link_to '依頼詳細', edit_order_path(order.id), class: 'btn requesting_message_btn requesting_btn' %>
-                  <%= link_to '配達員に連絡', conversations_path(sender_id: current_user.id, recipient_id: order.courier_id, order_id: order.id), method: :post, class: 'btn requesting_message_btn requesting_btn' %>
-                </div>
-              </div>
-            <% end %>
-          <% end %>
-        <% elsif current_user.category == '配達員' %>
-          <% if @courier_orders.present? %>
-            <% @courier_orders.each do |order| %>
-              <div class="requesting">
-                <%= image_tag 'memo1.png', class: 'memo_image' %>
-                <div class="requesting_content tilt">
-                  <p class="requesting_info">受託中の依頼</p>
-                  <div class="requesting_text">
-                    <%= order.customer.family_name %><%= order.customer.first_name %>様の買い物依頼
-                  </div>
-                  <%= link_to '依頼詳細', edit_order_path(order.id), class: 'btn requesting_message_btn requesting_btn' %>
-                  <%= link_to 'カスタマーに連絡', conversations_path(sender_id: current_user.id, recipient_id: order.customer_id, order_id: order.id), method: :post, class: 'btn requesting_message_btn requesting_btn' %>
-                </div>
-              </div>
-            <% end %>
-          <% end %>
-        <% end %>
-      </div>
+  <div class="center_btn_area btn_area">
+    <%= link_to 'ログイン', new_user_session_path, class: 'btn index_btn index_top_btn index_login_btn' %>
+    <%= link_to '新規会員登録', new_user_registration_path, class: 'btn index_btn index_top_btn index_signup_btn' %>
+  </div>
 
-      <div class="mypage_menu_btns">
-        <% if current_user.category == 'カスタマー' %>
-          <%= link_to '新規買い物依頼', new_order_path, class: 'btn mypage_menu_btn menu_btn mypage_new_order_btn' %>
-          <%= link_to '会員情報編集', edit_user_registration_path, class: 'btn mypage_menu_btn menu_btn mypage_user_edit_btn' %>
-          <%= link_to '買い物履歴', history_orders_path, class: 'btn mypage_menu_btn menu_btn mypage_shopping_list_btn' %>
-        <% elsif current_user.category == '配達員' %>
-          <%= link_to '依頼一覧', orders_path, class: 'btn mypage_menu_btn menu_btn mypage_order_list_btn' %>
-          <%= link_to '会員情報編集', edit_user_registration_path, class: 'btn mypage_menu_btn menu_btn mypage_user_edit_btn' %>
-          <%= link_to '配達履歴', history_orders_path, class: 'btn mypage_menu_btn menu_btn mypage_delivery_list_btn' %>
-        <% end %>
+  <div class="info_images_area">
+    <div class="info_area info1_area">
+      <%= image_tag 'info1.png', class: 'info_image info1_image' %>
+      <div class="info_fukidashi_area info1_fukidashi_area">
+        <%= image_tag 'fukidashi_mokomoko.png', class: 'info1_fukidashi_image' %>
+        <%= image_tag 'ss1.png', class: 'ss_image ss_image1' %>
       </div>
     </div>
+    <%= image_tag 'yajirushi.png', class: 'yajirushi_image yajirushi_image1' %>
+    <div class="info_area info2_area">
+      <%= image_tag 'info2.png', class: 'info_image info2_image' %>
+      <div class="info_fukidashi_area info2_fukidashi_area">
+        <%= image_tag 'fukidashi_mokomoko.png', class: 'info2_fukidashi_image' %>
+        <%= image_tag 'ss2.png', class: 'ss_image ss_image2' %>
+      </div>
+      <p class="ok">OK！</p>
+    </div>
+    <%= image_tag 'yajirushi.png', class: 'yajirushi_image yajirushi_image2' %>
+    <div class="green_image_area">
+      <%= image_tag 'top2.jpg', class: 'index_image green_image' %>
+      <div class="green_image_postit_area">
+        <%= image_tag 'postit8.png', class: 'pink_postit_image' %>
+        <p class="green_image_postit_content">これからお届けします！</p>
+      </div>
+    </div>
+    <%= image_tag 'yajirushi.png', class: 'yajirushi_image yajirushi_image3' %>
+    <div class="info3_area">
+      <%= image_tag 'info3.png', class: 'info_image info3_image' %>
+      <div class="info_fukidashi_area info3_fukidashi_area">
+        <%= image_tag 'fukidashi_maru.png', class: 'info_fukidashi_area info3_fukidashi_image' %>
+        <p class="info3_fukidashi_content">商品受け取り時に<br>代金＋手数料¥500を<br>配達員とひきかえます</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom_btn_area btn_area">
+    <%= link_to 'ログイン', new_user_session_path, class: 'btn btn_shadow index_btn index_top_btn index_login_btn' %>
+    <%= link_to '新規会員登録', new_user_registration_path, class: 'btn btn_shadow index_btn index_top_btn index_signup_btn' %>
   </div>
 </div>

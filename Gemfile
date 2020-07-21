@@ -30,6 +30,9 @@ gem 'cancancan'
 # font-awesome
 gem 'font-awesome-sass', '~> 5.4.1'
 
+# sendgrid凍結のため本番環境にもletter_opener
+gem 'letter_opener_web'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
@@ -40,7 +43,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 
-  gem 'letter_opener_web'
+  # gem 'letter_opener_web'
 end
 
 group :test do

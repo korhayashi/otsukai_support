@@ -1,3 +1,7 @@
+<div id="kirehashi"></div>
+<div class="menu_tilt"></div>
+<%= render 'common/menu_btn' %>
+
 <div id="main_container" class="flex">
   <%= render 'common/side_menu' %>
 
@@ -13,16 +17,37 @@
     <div class="orders">
       <% if @orders.present? %>
         <% @orders.each do |order| %>
-          <div class="order">
-            <div class="order_left">
-              <%= order.customer.family_name %><%= order.customer.first_name %>様<br>
-              <%= order.customer.address %>
-              <p>依頼期限：<%= l order.deadline, format: :short %></p>
+          <% order_content = order.content.gsub(/\r\n|\r|\n/, '<br>').html_safe %>
+          <% now = DateTime.now %>
+          <% deadline = order.deadline.to_datetime %>
+          <% if deadline > now %>
+            <div class="order">
+              <%= image_tag 'memo2.png', class: 'memo_image memo_order_list_image' %>
+              <table class="order_table tilt">
+                <tr>
+                  <td class="table_right"><%= order_content[0,9] %>...</td>
+                  <td>
+                    〒<%= order.customer.postal_code %><br>
+                    <%= order.customer.address[0..2] %>...<br>
+                    <p class="order_history_name"><%= order.customer.family_name %><%= order.customer.first_name %>様</p>
+                  </td>
+                </tr>
+                <tr>
+                  <th>終了期限</th>
+                  <td><%= l order.deadline, format: :short %></td>
+                </tr>
+                <tr>
+                  <th>依頼日時</th>
+                  <td><%= l order.created_at, format: :short %></td>
+                </tr>
+                <tr>
+                  <td colspan="2" class="table_btn">
+                    <%= link_to '依頼詳細', edit_order_path(order.id), class: 'btn requesting_message_btn requesting_btn memo_btn_shadow' %>
+                  </td>
+                </tr>
+              </table>
             </div>
-            <div class="order_right">
-              <%= link_to '詳細', edit_order_path(order.id) %>
-            </div>
-          </div>
+          <% end %>
         <% end %>
       <% else %>
         現在依頼はありません
