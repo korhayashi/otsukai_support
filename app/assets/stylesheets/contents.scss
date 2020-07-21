@@ -1,3 +1,499 @@
+@import 'variables';
+
+// indexページ
+#index_container {
+  min-width: 100vh;
+  margin-top: 10rem;
+  margin-bottom: 0;
+  text-align: center;
+
+  p {
+    margin: 0;
+  }
+}
+
+.index_image {
+  width: 80rem;
+  filter: drop-shadow(0.5rem 0.5rem 0.4rem #666042);
+}
+
+.white_image_area {
+  width: 800px;
+  margin: 0 auto 3rem auto;
+  font-family: '筑紫B丸ゴシック';
+  position: relative;
+}
+
+.top_black_postit_area {
+  width: 220px;
+  height: 220px;
+  padding: 50px 12px 30px 12px;
+  background-color: rgba(31, 29, 30, 0.85);
+  color: $bg-color;
+  position: relative;
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  transform: rotate(-10deg);
+  filter: drop-shadow(0 0.5rem 0.4rem $gray);
+}
+
+.top_pink_postit_area {
+  width: 200px;
+  height: 200px;
+  padding: 50px 12px 20px 12px;
+  font-size: 16px;
+  background-color: rgba(224, 112, 138, 0.85);
+  color: $font-color;
+  position: relative;
+  position: absolute;
+  bottom: -20px;
+  left: -110px;
+  transform: rotate(10deg);
+  filter: drop-shadow(0 0.5rem 0.4rem $gray);
+}
+
+.tape_image {
+  position: absolute;
+  top: -30px;
+  left: 10px;
+}
+
+.pin_image {
+  position: absolute;
+  top: -20px;
+  left: 70px;
+}
+
+.triangle {
+  width: 100%;
+  padding: 7rem 3rem;
+  position: relative;
+  z-index: 0;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    transform: skewY(16deg);
+    transform-origin: top left;
+    z-index: -1;
+    width: 100%;
+    height: 70rem;
+    background-color: $yellow;
+  }
+}
+
+.lets_use_area {
+  height: 45rem;
+}
+
+.lets_use_content {
+  padding-top: 18rem;
+  font-size: 4.3rem;
+  font-weight: bold;
+  position: relative;
+  z-index: 2;
+}
+
+.btn_area {
+  height: 20rem;
+  padding: 3rem 0;
+  background-color: $yellow;
+}
+
+.index_btn {
+  padding: 0.5rem 1.5rem;
+  background-color: $font-color;
+  color: $yellow;
+  font-weight: bold;
+  border: 1px solid $font-color;
+  position: relative;
+  filter: drop-shadow(0 0.4rem 0.4rem #666042);
+
+  &:hover {
+    background-color: $yellow;
+    color: $font-color;
+    border: 1px solid $font-color;
+  }
+
+  &:active {
+    top: 0.4rem;
+  }
+}
+
+.index_top_btn {
+  padding: 2.5rem 3.5rem;
+  font-size: 2rem;
+}
+
+.index_form_btn {
+}
+
+.index_login_btn {
+  margin-right: 10rem;
+}
+
+.info_area {
+  margin: 0 auto;
+  position: relative;
+}
+
+.info_image {
+  position: absolute;
+}
+
+.info_images_area {
+  height: 270rem;
+  background-color: $yellow;
+}
+
+.info_fukidashi_area {
+  margin: 0 auto;
+  position: relative;
+  position: absolute;
+}
+
+.ss_image {
+  position: absolute;
+}
+
+.yajirushi_image {
+  width: 10rem;
+  margin: 1rem auto;
+  display: block;
+  transform: rotate(90deg);
+}
+
+.info1_area {
+  width: 300px;
+  height: 580px;
+}
+
+.info1_fukidashi_area {
+  width: 400px;
+  top: 0;
+  left: -130px;
+}
+
+.info1_fukidashi_image {
+  width: 400px;
+  height: 400px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.ss_image1 {
+  height: 220px;
+  top: 50px;
+  left: 100px;
+}
+
+.info1_image {
+  width: 300px;
+  position: absolute;
+  top: 370px;
+  left: 110px;
+}
+
+.info2_area {
+  width: 500px;
+  height: 600px;
+}
+
+.info2_image {
+  width: 150px;
+  transform: scale(-1, 1);
+  top: 350px;
+  left: 100px;
+}
+
+.info2_fukidashi_area {
+  width: 440px;
+  top: 0;
+  left: 200px;
+}
+
+.info2_fukidashi_image {
+  width: 440px;
+  height: 480px;
+  transform: scale(-1, 1);
+  top: 0;
+  left: 0;
+}
+
+.ss_image2 {
+  height: 290px;
+  top: 50px;
+  left: 100px;
+}
+
+.ok {
+  font-size: 24px;
+  font-family: 'Helvetica ボールド';
+  font-weight: bold;
+  position: absolute;
+  bottom: 270px;
+  left: 140px;
+}
+
+.green_image_area {
+  width: 800px;
+  margin: 5rem auto;
+  position: relative;
+}
+
+.green_image_postit_area {
+  width: 200px;
+  position: relative;
+  position: absolute;
+  top: 70px;
+  right: -80px;
+}
+
+.green_image_postit_content {
+  font-size: 15px;
+  position: absolute;
+  top: 20px;
+  left: 13px;
+  transform: rotate(-6deg);
+}
+
+.info3_area {
+  width: 350px;
+  margin: 5rem auto;
+  position: relative;
+}
+
+.info3_image {
+  width: 334px;
+  top: 150px;
+  left: 0;
+}
+
+.info3_fukidashi_area {
+  width: 525px;
+  margin: 0 auto;
+  top: -10px;
+  left: -230px;
+}
+
+.info3_fukidashi_image {
+  width: 220px;
+  height: 170px;
+  transform: scale(-1, 1);
+}
+
+.info3_fukidashi_content {
+  font-size: 15px;
+  font-weight: bold;
+  position: absolute;
+  top: 45px;
+  left: 300px;
+}
+
+.bottom_btn_area {
+  height: 37rem;
+  padding-top: 13rem;
+  padding-bottom: 5rem;
+}
+
+
 .info_images img {
   width: 15rem;
+}
+
+.top_image {
+  width: 80rem;
+}
+
+#main_container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-image: url('bg.png');
+  color: $font-color;
+}
+
+.mypage {
+  padding-top: 13rem;
+  text-align: center;
+}
+
+.mypage_image_area {
+  margin: 0 auto;
+  position: relative;
+}
+
+.mypage_tape_image {
+  width: 200px;
+  height: 65px;
+  position: absolute;
+  top: -4rem;
+  left: 35rem;
+}
+
+.user_icon {
+  // width: 20rem;
+  color: $gray;
+}
+
+.mypage_user_icon {
+  margin-left: 1rem;
+  font-size: 5rem;
+  filter: drop-shadow(0.2rem 0.2rem 0.1rem $lightgray);
+}
+
+.mypage_user_category, .mypage_user_name {
+  text-align: right;
+}
+
+.mypage_user_name {
+  margin-bottom: 1rem;
+  font-size: 1.9rem;
+  font-weight: bold;
+
+  a {
+    color: $gray;
+  }
+}
+
+.requestings {
+  width: 60rem;
+  margin: 4rem auto 3rem auto;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.requesting {
+  position: relative;
+  font-size: 13px;
+}
+
+.memo_image {
+  width: 300px;
+}
+
+.requesting_content {
+  position: absolute;
+  top: 45px;
+  left: 50px;
+}
+
+.requesting_info {
+  margin-bottom: 0.5rem;
+}
+
+.requesting_text {
+  margin: 1rem 0;
+  color: $red;
+}
+
+.requesting_btn, .note_btn {
+  padding: 0.7rem;
+  display: inline-block;
+  background-color: $brown;
+  color: $bg-color;
+  text-decoration: none;
+  border: 1px dashed #a27d4e;
+  box-shadow: 0 0 0 0.3rem $brown;
+  filter: drop-shadow(0.2rem 0.2rem 0.2rem $brown);
+  transition: 0.3s;
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &:active {
+    filter: none;
+    transform: translateY(0.2rem);
+  }
+}
+
+.requesting_message_btn, .done_btn {
+  margin-left: 1rem;
+}
+
+.mypage_menu_btn {
+  width: 20rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem 4rem;
+  transition: 0.3s;
+  filter: drop-shadow(0.5rem 0.5rem 0.7rem $lightgray);
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &:active {
+    position: relative;
+    box-shadow: none;
+    top: 0.7rem;
+  }
+}
+
+.mypage_new_order_btn, .mypage_order_list_btn {
+  background: btn_gradation_center($red, #803925);
+}
+
+.mypage_user_edit_btn {
+  background: btn_gradation_center($blue, #557467);
+}
+
+.mypage_shopping_list_btn, .mypage_delivery_list_btn {
+  background: btn_gradation_center($orange, #94752C);
+}
+
+// サンクスページ
+.thanks_page_content {
+  width: 70rem;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+
+  p {
+    margin-bottom: 3rem;
+  }
+}
+
+.thanks_links {
+
+  a {
+    display: block;
+    color: $red;
+  }
+}
+
+// devise上書き
+.user_form {
+  width: 30rem;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.form_submit_btn {
+}
+
+.form_info {
+  margin-top: 3rem;
+  text-align: center;
+
+  a {
+    color: $red;
+  }
+}
+
+.short_form, .short_content {
+  height: 35rem;
+}
+
+.user_delete_btn_area {
+  width: 13.5rem;
 }

@@ -1,16 +1,76 @@
-<div class="container">
-  <div class="top_image">
-    <%= image_tag 'top.jpg' %>
+<div id="kirehashi"></div>
+<div class="menu_tilt"></div>
+<%= render 'common/menu_btn' %>
+
+<div id="main_container" class="flex">
+  <%= render 'common/side_menu' %>
+
+  <div id="bg_main" class="mypage top_space">
+    <div class="mypage_image_area">
+      <% if current_user.category == 'カスタマー' %>
+        <%= image_tag 'top1.jpg', class: 'mypage_image' %>
+        <%= image_tag 'tape2.png', class: 'mypage_tape_image' %>
+      <% elsif current_user.category == '配達員' %>
+        <%= image_tag 'top2.jpg', class: 'mypage_image' %>
+        <%= image_tag 'tape3.png', class: 'mypage_tape_image' %>
+      <% end %>
+    </div>
+
+    <div class="requestings">
+      <% if current_user.category == 'カスタマー' %>
+        <% if @customer_orders0.present? %>
+          <% @customer_orders0.each do |order| %>
+            <% now = DateTime.now %>
+            <% deadline = order.deadline.to_datetime %>
+            <% if deadline > now %>
+              <div class="requesting">
+                <%= image_tag 'memo1.png',class: 'memo_image' %>
+                <div class="requesting_content tilt">
+                  <p class="requesting_info">依頼中の買い物</p>
+                  <div class="requesting_text">
+                    現在配達員を探しています。<br>
+                    依頼期限：<%= l order.deadline, format: :short %>
+                  </div>
+                  <%= link_to '依頼詳細', edit_order_path(order.id), class: 'btn requesting_message_btn requesting_btn btn_shadow' %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+        <% if @customer_orders1.present? %>
+          <% @customer_orders1.each do |order| %>
+            <div class="requesting">
+              <%= image_tag 'memo1.png', class: 'memo_image' %>
+              <div class="requesting_content tilt">
+                <p class="requesting_info">依頼中の買い物</p>
+                <div class="requesting_text">
+                  配達員が決まりました！<br>
+                  <%= order.courier.family_name %>が買い物・配達に伺います。
+                </div>
+                <%= link_to '依頼詳細', edit_order_path(order.id), class: 'btn requesting_message_btn requesting_btn btn_shadow' %>
+                <%= link_to '配達員に連絡', conversations_path(sender_id: current_user.id, recipient_id: order.courier_id, order_id: order.id), method: :post, class: 'btn requesting_message_btn requesting_btn memo_btn_shadow' %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      <% elsif current_user.category == '配達員' %>
+        <% if @courier_orders.present? %>
+          <% @courier_orders.each do |order| %>
+            <div class="requesting">
+              <%= image_tag 'memo1.png', class: 'memo_image' %>
+              <div class="requesting_content tilt">
+                <p class="requesting_info">受託中の依頼</p>
+                <div class="requesting_text">
+                  <%= order.customer.family_name %><%= order.customer.first_name %>様の買い物依頼
+                </div>
+                <%= link_to '依頼詳細', edit_order_path(order.id), class: 'btn requesting_message_btn requesting_btn btn_shadow' %>
+                <%= link_to 'カスタマーに連絡', conversations_path(sender_id: current_user.id, recipient_id: order.customer_id, order_id: order.id), method: :post, class: 'btn requesting_message_btn requesting_btn memo_btn_shadow' %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
   </div>
-  <div class="info_images">
-    <%= image_tag 'info1.png' %>
-    <%= image_tag 'info2.png' %>
-  </div>
-</div>
-<p>今すぐ買い物をはじめましょう！</p>
-<div class="login_btn">
-  <%= link_to 'ログイン', new_user_session_path %>
-</div>
-<div class="signup_btn">
-  <%= link_to '新規カスタマー登録', new_user_registration_path %>
+
 </div>

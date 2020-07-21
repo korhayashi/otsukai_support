@@ -1,23 +1,19 @@
-<div class="menu_view">
-  <% if current_user.category == 'カスタマー' %>
-    <div class="menu_new_order">
-      <%= link_to '新規買い物依頼', new_order_path %>
+<div class="menu_view top_space">
+  <div class="menu_view_user_area">
+    <div class="menu_view_user">
+      <div class="mypage_user_category">
+        <%= current_user.category %>
+      </div>
+      <div class="mypage_user_name">
+        <%= link_to home_path do %>
+          <%= current_user.family_name %>
+          <%= current_user.first_name %>
+          様
+        <% end %>
+      </div>
     </div>
-    <div class="menu_user_edit">
-      <%= link_to '会員情報編集', edit_user_registration_path %>
+    <div class="mypage_user_icon">
+      <%= icon 'fas', 'user-circle', class: 'user_icon mypage_user_icon' %>
     </div>
-    <div class="menu_shopping_list">
-      <%= link_to '買い物履歴', history_orders_path %>
-    </div>
-  <% elsif current_user.category == 1 %>
-    <div class="menu_order_list">
-      <%= link_to '依頼一覧', orders_path %>
-    </div>
-    <div class="menu_shopping_list">
-      <%= link_to '会員情報編集', edit_user_registration_path %>
-    </div>
-    <div class="menu_delivery_list">
-      <%= link_to '配達履歴', history_orders_path %>
-    </div>
-  <% end %>
+  </div>
 </div>

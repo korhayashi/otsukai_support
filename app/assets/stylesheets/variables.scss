@@ -1,0 +1,19 @@
+$bg-color: #f0f1f8;
+$blue: #80bca3;
+$red: #bf4d28;
+$lightgray: #ada7a6;
+$gray: #676160;
+$orange: #e6ac27;
+$cream: #f6f7bd;
+$brown: #655643;
+$yellow: #f2da21;
+$font-color: #1f1d1e;
+$shadow: #513c27;
+
+@function btn_gradation($color, $color2) {
+  @return linear-gradient(-135deg, $color, $color2)
+};
+
+@function btn_gradation_center($color, $color2) {
+  @return linear-gradient($color, $color2)
+};

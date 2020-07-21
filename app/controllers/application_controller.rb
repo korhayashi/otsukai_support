@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
+
   protected
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:category])
@@ -17,5 +18,21 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:address])
     devise_parameter_sanitizer.permit(:account_update, keys: [:phone_number])
     devise_parameter_sanitizer.permit(:account_update, keys: [:admin])
+  end
+
+  def not_authorized_from_customer
+    if current_user.category == 'カスタマー'
+      redirect_to root_path
+    end
+  end
+
+  def not_authorized_from_courier
+    if current_user.category == '配達員'
+      redirect_to root_path
+    end
+  end
+
+  def after_sign_in_path_for(resource)
+    home_path
   end
 end

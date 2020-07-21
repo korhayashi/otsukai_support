@@ -1,23 +1,37 @@
-<p>買い物依頼を確定してもよろしいですか？</p>
-<table>
-  <tr>
-    <th>買い物リスト</th>
-    <td><%= @order_content %></td>
-  </tr>
-  <tr>
-    <th>備考</th>
-    <td><%= @order_note %></td>
-  </tr>
-  <tr>
-    <th>終了期限</th>
-    <td><%= l @order.deadline, format: :short %></td>
-  </tr>
-</table>
+<div id="kirehashi"></div>
+<div class="menu_tilt"></div>
+<%= render 'common/menu_btn' %>
 
-<%= form_with(model: @order, local: true) do |f| %>
-  <%= f.hidden_field :content %>
-  <%= f.hidden_field :note %>
-  <%= f.hidden_field :deadline %>
-  <%= f.submit '戻る', name: 'back' %>
-  <%= f.submit '依頼確定' %>
-<% end %>
+<div id="main_container" class="flex">
+  <%= render 'common/side_menu' %>
+
+  <div id="bg_main" class="order_detail top_space">
+    <div class="confirm">
+      <p class="form_info">買い物依頼を確定してもよろしいですか？</p>
+      <table class="confirm_table">
+        <tr>
+          <th>買い物リスト</th>
+          <td><%= @order_content %></td>
+        </tr>
+        <tr>
+          <th>備考</th>
+          <td><%= @order_note %></td>
+        </tr>
+        <tr>
+          <th>終了期限</th>
+          <td><%= l @order.deadline, format: :short %></td>
+        </tr>
+      </table>
+
+      <%= form_with(model: @order, local: true) do |f| %>
+        <%= f.hidden_field :content %>
+        <%= f.hidden_field :note %>
+        <%= f.hidden_field :deadline %>
+        <div class="confirm_btn_area">
+          <%= f.submit '戻る', name: 'back', class: 'btn common_btn btn_shadow_dark back_btn' %>
+          <%= f.submit '依頼確定', class: 'btn common_btn btn_shadow_dark done_btn' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

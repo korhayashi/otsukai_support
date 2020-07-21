@@ -5,28 +5,33 @@ class MessagesController < ApplicationController
   end
 
   def index
-    @messages = @conversation.messages
-    if @messages.length > 10
-      @over_ten = true
-      @messages = Message.where(id: @messages[-10..-1].pluck(:id))
+    if current_user.id == @conversation.sender_id || current_user.id == @conversation.recipient_id
+      @messages = @conversation.messages.order(:created_at)
+      if @messages.last
+        @messages.where.not(user_id: current_user.id).update_all(read: true)
+      end
+      if params[:m]
+        @over_ten = false
+      elsif @messages.length > 10
+        @over_ten = true
+        @messages = @messages.last(10)
+      end
+      @message = @conversation.messages.build
+    else
+      redirect_to home_path
     end
-    if params[:m]
-      @over_ten = false
-      @messages = @conversation.messages
-    end
-    if @messages.last
-      @messages.where.not(user_id: current_user.id).update_all(read: true)
-    end
-    @messages = @messages.order(:created_at)
-    @message = @conversation.messages.build
   end
 
   def create
-    @message = @conversation.messages.build(message_params)
-    if @message.save
-      redirect_to conversation_messages_path(@conversation)
+    if current_user.id == @conversation.sender_id || current_user.id == @conversation.recipient_id
+      @message = @conversation.messages.build(message_params)
+      if @message.save
+        redirect_to conversation_messages_path(@conversation)
+      else
+        render 'index'
+      end
     else
-      render 'index'
+      redirect_to home_path
     end
   end
 
