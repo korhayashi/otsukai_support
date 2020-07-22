@@ -1,24 +1,24 @@
-30.times do |n|
-  email = Faker::Internet.email
-  password = Faker::Internet.password
-  category = rand(0..1)
-  family_name = Faker::Name.last_name
-  first_name = Faker::Name.first_name
-  postal_code = Faker::Address.postcode
-  address = Faker::Address.full_address
-  phone_number = Faker::PhoneNumber.cell_phone
-
-  User.create!(
-    email: email,
-    password: password,
-    category: category,
-    family_name: family_name,
-    first_name: first_name,
-    postal_code: postal_code,
-    address: address,
-    phone_number: phone_number
-  )
-end
+# 30.times do |n|
+#   email = Faker::Internet.email
+#   password = Faker::Internet.password
+#   category = rand(0..1)
+#   family_name = Faker::Name.last_name
+#   first_name = Faker::Name.first_name
+#   postal_code = Faker::Address.postcode
+#   address = Faker::Address.full_address
+#   phone_number = Faker::PhoneNumber.cell_phone
+#
+#   User.create!(
+#     email: email,
+#     password: password,
+#     category: category,
+#     family_name: family_name,
+#     first_name: first_name,
+#     postal_code: postal_code,
+#     address: address,
+#     phone_number: phone_number
+#   )
+# end
 
 30.times do |n|
   content = Faker::Food.description
