@@ -1,26 +1,41 @@
 @import 'variables';
 
+.container .message_flex {
+  width: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
 .message_container {
+  margin-left: auto;
   text-align: left;
 }
 
 .message_flex {
+  width: 70rem;
+  margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
 }
 
+.message_area {
+  width: 55rem;
+}
+
 .message_page {
-  width: 70rem;
+  // width: 105rem;
   height: 100%;
   margin: 0 auto;
 }
 
 .message_form {
-  width: 110rem;
+  width: 100vw;
   padding: 1.5rem 4rem 1.5rem 0;
   // background-color: rgba(243, 243, 243, 0.6);
   background-color: #f3f3f3;
-  position: fixed;
+  position: sticky;
+
   bottom: 0;
   right: 0;
 }

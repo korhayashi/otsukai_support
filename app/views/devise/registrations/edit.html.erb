@@ -1,14 +1,14 @@
 <div id="kirehashi"></div>
-<div class="menu_tilt"></div>
 <%= render 'common/menu_btn' %>
 
 <div id="main_container" class="flex">
   <%= render 'common/side_menu' %>
+  <div class="triangle"></div>
 
   <div id="bg_main" class="top_space">
+    <%= render "devise/shared/error_messages", resource: resource %>
     <div class="form_container">
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'user_form' }) do |f| %>
-        <%= render "devise/shared/error_messages", resource: resource %>
         <div class="field">
           <%= f.label :family_name, 'お名前', class: 'form_info' %><br />
           <%= f.text_field :family_name, class: 'form_name form_family_name' %>

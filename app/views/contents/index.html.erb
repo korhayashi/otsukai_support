@@ -1,21 +1,22 @@
 <div id="index_container">
-  <div class="white_image_area">
-    <%= image_tag 'top1.jpg', class: 'index_image white_image' %>
-    <div class="top_black_postit_area">
-      <p class="top_black_postit_content">買い物に出られない・<br>出たくない日のあなたの<br>お買い物をサポート<br>します。</p>
-      <%= image_tag 'tape.png', class: 'tape_image' %>
-    </div>
-    <div class="top_pink_postit_area">
-      <p class="top_pink_postit_content">近所の買い物を<br>代行して<br>すきま時間に<br>収入を得られます。</p>
-      <%= image_tag 'pin.png', class: 'pin_image' %>
+  <div class="white">
+    <div class="white_image_area">
+      <%= image_tag 'top1.jpg', class: 'index_image white_image' %>
+      <div class="top_black_postit_area">
+        <p class="top_black_postit_content">買い物に出られない・<br>出たくない日のあなたの<br>お買い物をサポート<br>します。</p>
+        <%= image_tag 'tape.png', class: 'tape_image' %>
+      </div>
+      <div class="top_pink_postit_area">
+        <p class="top_pink_postit_content">近所の買い物を<br>代行して<br>すきま時間に<br>収入を得られます。</p>
+        <%= image_tag 'pin.png', class: 'pin_image' %>
+      </div>
     </div>
   </div>
 
-  <div class="lets_use_area triangle">
-    <p class="lets_use_content">買い物/配達をしてみましょう！</p>
-  </div>
+  <div class="lets_use_area triangle_area"></div>
+  <p class="lets_use_content">買い物/配達をしてみましょう！</p>
 
-  <div class="center_btn_area btn_area">
+  <div class="center_btn_area btn_area yellow_area">
     <%= link_to 'ログイン', new_user_session_path, class: 'btn index_btn index_top_btn index_login_btn' %>
     <%= link_to '新規会員登録', new_user_registration_path, class: 'btn index_btn index_top_btn index_signup_btn' %>
   </div>
