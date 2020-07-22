@@ -1,63 +1,62 @@
-<div class="short_container">
-  <div class="triangle no_scroll">
-    <div class="account_form">
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'user_form' }) do |f| %>
-        <%= render "devise/shared/error_messages", resource: resource %>
+<div class="short_container yellow_container">
+  <div class="triangle_area triangle_space"></div>
+  <div class="short_form login_form">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'user_form' }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
 
-        <div class="field">
-          <%= f.label :family_name, 'お名前' %><br />
-          <%= f.text_field :family_name, class: 'form_name form_family_name' %>
-          <%= f.text_field :first_name, class: 'form_name' %>
-        </div>
-
-        <div class="field">
-          <%= f.label :email %><br />
-          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-        </div>
-
-        <div class="field">
-          <%= f.label :password %>
-          <% if @minimum_password_length %>
-          <em><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></em>
-          <% end %><br />
-          <%= f.password_field :password, autocomplete: "new-password" %>
-        </div>
-
-        <div class="field">
-          <%= f.label :password_confirmation %><br />
-          <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-        </div>
-
-        <div class="field">
-          <%= f.label :postal_code %><br />
-          <%= f.text_field :postal_code %>
-        </div>
-
-        <div class="field">
-          <%= f.label :address %><br />
-          <%= f.text_field :address %>
-        </div>
-
-        <div class="field">
-          <%= f.label :phone_number %><br />
-          <%= f.text_field :phone_number %>
-        </div>
-
-        <div class="field">
-          <%= 'カスタマー/配達員' %><br />
-          <% ['カスタマー', '配達員'].each_with_index do |category, i| %>
-            <label><%= f.radio_button :category, category %><%= category %></label>
-          <% end %>
-        </div>
-
-        <div class="actions">
-          <%= f.submit t('.sign_up'), class: 'btn index_btn index_form_btn' %>
-        </div>
-      <% end %>
-
-      <div class="form_info">
-        <%= render "devise/shared/links" %>
+      <div class="field">
+        <%= f.label :family_name, 'お名前' %><br />
+        <%= f.text_field :family_name, class: 'form_name form_family_name' %>
+        <%= f.text_field :first_name, class: 'form_name' %>
       </div>
+
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password %>
+        <% if @minimum_password_length %>
+        <em><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "new-password" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :postal_code %><br />
+        <%= f.text_field :postal_code %>
+      </div>
+
+      <div class="field">
+        <%= f.label :address %><br />
+        <%= f.text_field :address %>
+      </div>
+
+      <div class="field">
+        <%= f.label :phone_number %><br />
+        <%= f.text_field :phone_number %>
+      </div>
+
+      <div class="field">
+        <%= 'カスタマー/配達員' %><br />
+        <% ['カスタマー', '配達員'].each_with_index do |category, i| %>
+          <label><%= f.radio_button :category, category %><%= category %></label>
+        <% end %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit t('.sign_up'), class: 'btn index_btn index_form_btn' %>
+      </div>
+    <% end %>
+
+    <div class="form_info">
+      <%= render "devise/shared/links" %>
     </div>
   </div>
 </div>

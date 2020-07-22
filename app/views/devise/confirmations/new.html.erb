@@ -1,7 +1,8 @@
-<div class="short_container">
-  <div class="triangle no_scroll">
-    <div class="short_form account_confirm_form">
+<div class="short_container yellow_container">
+  <div class="triangle_area triangle_space"></div>
+  <div class="short_form account_confirm_form">
 
+    <div class="login_form">
       <h3><%= t('.resend_confirmation_instructions') %></h3>
 
       <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, class: 'user_form' }) do |f| %>

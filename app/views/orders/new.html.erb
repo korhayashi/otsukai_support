@@ -1,12 +1,12 @@
 <div id="kirehashi"></div>
-<div class="menu_tilt"></div>
 <%= render 'common/menu_btn' %>
 
 <div id="main_container" class="flex">
   <%= render 'common/side_menu' %>
+  <div class="triangle"></div>
 
   <div id="bg_main" class="new_order top_space">
-    <div class="form_container">
+    <div id="" class="form_container">
       <% if @order.errors.any? %>
         <div class="note error_message_note">
             <div class="note_content error_message_note_content">
@@ -20,47 +20,49 @@
             </div>
         </div>
       <% end %>
-      <h4>買い物メモを作りましょう！</h4>
-      <%= form_with(model: @order, local: true, url: confirm_orders_path) do |f| %>
-        <div class="new_order_form_content">
-          <%= f.text_area :content %>
-        </div>
-
-        <div class="new_order_form_note">
-          <div class="new_order_form_note_label">
-            <%= f.label :note, class: 'form_info' %>
+      <%= form_with(model: @order, local: true, url: confirm_orders_path, class: 'form') do |f| %>
+        <h4>買い物メモを作りましょう！</h4>
+        <div class="form_header">
+          <div class="new_order_form_content">
+            <%= f.text_area :content %>
           </div>
-          <%= f.text_area :note, placeholder: '代替品の指定や、別住所への配送の希望などございましたらこちらにご記入ください。' %>
-        </div>
 
-        <div class="new_order_form_deadline">
-          <%= f.label :deadline, class: 'form_info' %>
-          <%= f.datetime_select :deadline,
-            use_month_numbers: true,
-            start_year: Time.current.year,
-            end_year: Time.current.year,
-            default: DateTime.now,
-            date_separator: '/'
-          %>
+          <div class="new_order_form_note">
+            <div class="new_order_form_note_label">
+              <%= f.label :note, class: 'form_info' %>
+            </div>
+            <%= f.text_area :note, placeholder: '代替品の指定や、別住所への配送の希望などございましたらこちらにご記入ください。' %>
+          </div>
+
+          <div class="new_order_form_deadline">
+            <%= f.label :deadline, class: 'form_info' %>
+            <%= f.datetime_select :deadline,
+              use_month_numbers: true,
+              start_year: Time.current.year,
+              end_year: Time.current.year,
+              default: DateTime.now,
+              date_separator: '/'
+            %>
+          </div>
+        </div>
           <p class="form_info_condition">終了期限が過ぎた時点で配送員が見つからない場合は自動キャンセルとなります</p>
-        </div>
 
-        <hr>
+          <hr>
 
-        <p class="form_info">お届け先は以下でよろしいですか？</p>
-        <div class="new_order_form_address">
-          〒<%= current_user.postal_code %><br>
-          <%= current_user.address %><br>
-          <%= current_user.phone_number %>
-          <p><%= current_user.family_name %><%= current_user.first_name %>様</p>
-        </div>
+          <p class="form_info">お届け先は以下でよろしいですか？</p>
+          <div class="new_order_form_address">
+            〒<%= current_user.postal_code %><br>
+            <%= current_user.address %><br>
+            <%= current_user.phone_number %>
+            <p><%= current_user.family_name %><%= current_user.first_name %>様</p>
+          </div>
 
-        <hr>
+          <hr>
 
-        <div class="new_order_form_submit">
-          <%= f.submit '依頼する', class: 'btn common_btn btn_shadow_dark' %>
-        </div>
-      <% end %>
+          <div class="new_order_form_submit">
+            <%= f.submit '依頼する', class: 'btn common_btn btn_shadow_dark' %>
+          </div>
+        <% end %>
     </div>
   </div>
 </div>

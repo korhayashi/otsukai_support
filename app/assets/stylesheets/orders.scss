@@ -1,7 +1,11 @@
 @import 'variables';
 
+.orders_sort {
+  width: 100%;
+}
+
 .order_histories, .orders {
-  width: 90rem;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   text-align: center;
@@ -174,6 +178,12 @@
   width: 80rem;
 }
 
-.sort {
-  margin-bottom: 5rem;
+.sort, .no_history {
+  width: 50rem;
+  margin: 0 auto 5rem auto;
+}
+
+.form_header {
+  width:38rem;
+  margin: 0 auto;
 }
