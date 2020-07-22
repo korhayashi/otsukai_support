@@ -1,24 +1,23 @@
-<div class="short_container">
-  <div class="triangle no_scroll">
-    <div class="short_form account_unlock_form">
-      <h3><%= t('.resend_unlock_instructions') %></h3>
+<div class="short_container yellow_container">
+  <div class="triangle_area triangle_space"></div>
+  <div class="short_form login_form">
+    <h3><%= t('.resend_unlock_instructions') %></h3>
 
-      <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
-        <%= render "devise/shared/error_messages", resource: resource %>
+    <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post, class; 'user_form' }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
 
-        <div class="field">
-          <%= f.label :email %><br />
-          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-        </div>
-
-        <div class="actions">
-          <%= f.submit t('.resend_unlock_instructions') %>
-        </div>
-      <% end %>
-
-      <div class="form_info">
-        <%= render "devise/shared/links" %>
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
       </div>
+
+      <div class="actions">
+        <%= f.submit t('.resend_unlock_instructions'), class: 'btn index_btn' %>
+      </div>
+    <% end %>
+
+    <div class="form_info">
+      <%= render "devise/shared/links" %>
     </div>
   </div>
 </div>
