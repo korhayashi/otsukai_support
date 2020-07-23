@@ -5,6 +5,7 @@ class ContentsController < ApplicationController
     @customer_orders0 = Order.where(customer_id: current_user.id).where(status: 0)
     @customer_orders1 = Order.where(customer_id: current_user.id).where(status: 1)
     @courier_orders = Order.where(courier_id: current_user.id).where(status: 1)
+    @now = DateTime.now
   end
 
   def index

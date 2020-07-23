@@ -36,7 +36,7 @@ class OrdersController < ApplicationController
     else
       if @order.save
         OrderConfirmationMailer.order_confirmation(@order).deliver
-        redirect_to home_path
+        redirect_to home_path, notice: '買い物依頼ありがとうございます！配達員が見つかるのをお待ちください。'
       else
         render :new
       end
@@ -65,6 +65,9 @@ class OrdersController < ApplicationController
     if @order.update(order_params)
       if params[:commit] == '依頼受託'
         DelivererDecisionMailer.deliverer_decision(@order).deliver
+        flash[:notice] = '依頼を受託しました。買い物に向かいましょう！'
+      else
+        flash[:notice] = '配達完了を報告しました。お疲れさまでした！'
       end
       redirect_to home_path
     else
