@@ -1,19 +1,28 @@
 <div class="menu_view top_space">
-  <div class="menu_view_user_area">
-    <div class="menu_view_user">
-      <div class="mypage_user_category">
-        <%= current_user.category %>
+  <div class="sticky_parent">
+    <div class="menu_sticky">
+      <div class="menu_view_user_area">
+        <div class="menu_view_user">
+          <div class="mypage_user_category">
+            <%= current_user.category %>
+          </div>
+          <div class="mypage_user_name">
+            <%= link_to home_path do %>
+              <%= current_user.family_name %>
+              <%= current_user.first_name %>
+              様
+            <% end %>
+          </div>
+        </div>
+        <div class="mypage_user_icon">
+          <%= icon 'fas', 'user-circle', class: 'user_icon mypage_user_icon' %>
+        </div>
       </div>
-      <div class="mypage_user_name">
-        <%= link_to home_path do %>
-          <%= current_user.family_name %>
-          <%= current_user.first_name %>
-          様
-        <% end %>
-      </div>
-    </div>
-    <div class="mypage_user_icon">
-      <%= icon 'fas', 'user-circle', class: 'user_icon mypage_user_icon' %>
+      <% flash.each do |message_type, message| %>
+        <div id="flash" class="home_flash">
+          <h1><%= message %></h1>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
