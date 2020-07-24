@@ -41,31 +41,33 @@ hr {
 }
 
 h1 {
-  position: relative;
-  padding: 2rem 1.5rem;
-  font-size: 1.4rem;
-  color: $gray;
-  border-top: solid 1.5px $gray;
-  border-bottom: solid 1.5px $gray;
-  filter: drop-shadow(0.1rem 0.1rem 0.2rem $lightgray);
+    position: relative;
+    background: #b0d5de;
+    padding: 2rem;
+    text-align: center;
+    color: #878787;
+    font-size: 1.5rem;
+    border-radius: 1.9rem;
+    -webkit-border-radius: 1.9rem;
+    -moz-border-radius: 1.9rem;
 
-  &:before, &:after {
+&:after{
+    border: solid transparent;
     content: '';
+    height: 0;
+    width: 0;
     position: absolute;
-    top: -7px;
-    width: 2px;
-    height: -webkit-calc(100% + 14px);
-    height: calc(100% + 14px);
-    background-color: $gray;
-  }
+    border-color: rgba(92, 226, 255, 0);
+    border-top-width: 1.8rem;
+    border-bottom-width: 1.8rem;
+    border-left-width: 1.4rem;
+    border-right-width: 1.4rem;
+    margin-left: -1.4rem;
+    border-bottom-color: #b0d5de;
+    bottom: 100%;
+    left: 79%;
+}
 
-  &:before {
-    left: 7px;
-  }
-
-  &:after {
-    right: 7px;
-  }
 }
 
 
@@ -95,8 +97,43 @@ h4::after {
   border-top: 15px solid #f0f0f0;
 }
 
+input, select {
+  border: 1px solid $gray;
+  filter: drop-shadow(0.2rem 0.2rem 0.3rem $lightgray);
+}
+
+select {
+  padding: 0.5rem;
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+  width: 30rem;
+  height: 2.5rem;
+  padding: 1rem;
+}
+
+textarea {
+  width: 30rem;
+  height: 10rem;
+  padding: 1rem;
+  border: 1px solid $gray;
+}
+
+table th {
+  padding-right: 20px;
+  text-align: right;
+}
+
 .center {
   text-align: center;
+}
+
+.container {
+  min-width: 100vw;
+  min-height: 100vh;
+  padding-top: 10rem;
+  padding-bottom: 17rem;
+  position: relative;
 }
 
 .vertical_line {
@@ -104,6 +141,53 @@ h4::after {
   height: 2rem;
   margin: 1.5rem;
   background-color: $bg-color;
+}
+
+.space {
+  min-height: 10rem;
+  background-color: $yellow;
+}
+
+.return {
+  transform: skewY(-7deg);
+}
+
+.tilt {
+  transform: rotate(-2deg);
+}
+
+.btn {
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.top_space {
+  padding-top: 10rem;
+}
+
+.memo_btn_shadow {
+  filter: shadow($gray);
+}
+
+.btn_shadow_dark {
+  filter: shadow(#454342);
+}
+
+.common_btn {
+  padding: 0.5rem 1.2rem;
+  color: $font-color;
+  border: 1px solid $lightgray;
+  background-image:linear-gradient(-45deg, #dfdfdf 25%, #ffffff 25%, #ffffff 50%, #dfdfdf 50%, #dfdfdf 75%, #ffffff 75%, #ffffff);
+  background-size: 4rem 4rem;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:active {
+    filter: none;
+    transform: translate(0.2rem);
+  }
 }
 
 // ヘッダー
@@ -191,10 +275,6 @@ footer {
   }
 }
 
-.copyright {
-  font-size: 1.4rem;
-}
-
 .footer_container {
   display: flex;
   justify-content: center;
@@ -203,11 +283,11 @@ footer {
   bottom: 0;
 }
 
-table th {
-  padding-right: 20px;
-  text-align: right;
+.copyright {
+  font-size: 1.4rem;
 }
 
+// マイページサイドメニュー
 .menu_view {
   width: 40rem;
   min-height: 100vh;
@@ -230,15 +310,7 @@ table th {
   position: sticky;
 }
 
-#bg_main {
-  // width: 60rem;
-  width: 100%;
-  min-height: 100vh;
-  margin-left: auto;
-  // padding-left: 10rem;
-  border-right: 3rem solid #f3f3f3;
-}
-
+// マイページメニューボタン
 .menu_btns {
   width: 8rem;
   position: fixed;
@@ -274,21 +346,13 @@ table th {
   }
 }
 
-.top_space {
-  padding-top: 10rem;
-}
+// その他
 
-.container {
-  min-width: 100vw;
+#bg_main {
+  width: 100%;
   min-height: 100vh;
-  padding-top: 10rem;
-  padding-bottom: 17rem;
-  position: relative;
-}
-
-.btn {
-  text-decoration: none;
-  transition: 0.3s;
+  margin-left: auto;
+  border-right: 3rem solid #f3f3f3;
 }
 
 .new_order_btn, .order_list_btn {
@@ -301,32 +365,6 @@ table th {
 
 .shopping_list_btn, .delivery_list_btn {
   background: btn_gradation($orange, #94752C);
-}
-
-.tilt {
-  transform: rotate(-2deg);
-}
-
-input, select {
-  border: 1px solid $gray;
-  filter: drop-shadow(0.2rem 0.2rem 0.3rem $lightgray);
-}
-
-select {
-  padding: 0.5rem;
-}
-
-input[type="text"], input[type="email"], input[type="password"] {
-  width: 30rem;
-  height: 2.5rem;
-  padding: 1rem;
-}
-
-textarea {
-  width: 30rem;
-  height: 10rem;
-  padding: 1rem;
-  border: 1px solid $gray;
 }
 
 .short_container .form_name, #main_container .form_name {
@@ -381,32 +419,7 @@ textarea {
 }
 
 .btn_shadow, .form_shadow {
-  filter: drop-shadow(0.2rem 0.2rem 0.3rem $lightgray);
-}
-
-.memo_btn_shadow {
-  filter: drop-shadow(0.2rem 0.2rem 0.3rem $gray);
-}
-
-.btn_shadow_dark {
-  filter: drop-shadow(0.2rem 0.2rem 0.3rem #454342);
-}
-
-.common_btn {
-  padding: 0.5rem 1.2rem;
-  color: $font-color;
-  border: 1px solid $lightgray;
-  background-image:linear-gradient(-45deg, #dfdfdf 25%, #ffffff 25%, #ffffff 50%, #dfdfdf 50%, #dfdfdf 75%, #ffffff 75%, #ffffff);
-  background-size: 4rem 4rem;
-
-  &:hover {
-    opacity: 0.8;
-  }
-
-  &:active {
-    filter: none;
-    transform: translate(0.2rem);
-  }
+  filter: shadow($lightgray);
 }
 
 .short_container {
@@ -420,23 +433,6 @@ textarea {
   background-color: $yellow;
 }
 
-.space {
-  min-height: 10rem;
-  background-color: $yellow;
-}
-
-// .menu_tilt {
-//   width: 0;
-//   height: 0;
-//   margin-right: auto;
-//   border-bottom: 100vh solid transparent;
-//   border-left: 10rem solid #f3f3f3;
-//   position: fixed;
-//   top: 0;
-//   left: 40rem;
-//   z-index: 98;
-// }
-
 .triangle_area {
   width: 100%;
   height: 10rem;
@@ -444,10 +440,6 @@ textarea {
   padding-top: 30rem;
   background-color: #fff;
   transform: skewY(7deg);
-}
-
-.return {
-  transform: skewY(-7deg);
 }
 
 .white {
@@ -472,9 +464,6 @@ textarea {
   position: fixed;
   top: 0;
   left: 38rem;
-  // position: absolute;
-  // // top: 0;
-  // // left: 38rem;
 }
 
 .form {

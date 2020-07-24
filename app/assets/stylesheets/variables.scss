@@ -17,3 +17,7 @@ $shadow: #513c27;
 @function btn_gradation_center($color, $color2) {
   @return linear-gradient($color, $color2)
 };
+
+@function shadow($color) {
+  @return drop-shadow(0.2rem 0.2rem 0.3rem $color)
+;}
