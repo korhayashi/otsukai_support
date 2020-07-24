@@ -55,6 +55,8 @@ class OrdersController < ApplicationController
       if @order.status == '配達員決定' || @order.status == '配達完了'
         if current_user.id != @order.courier_id
           redirect_to home_path
+        elsif @order.deadline < DateTime.now
+          redirect_to home_path
         end
       end
     end

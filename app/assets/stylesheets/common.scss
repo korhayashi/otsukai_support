@@ -30,16 +30,6 @@ ul {
   padding: 0;
 }
 
-hr {
-  height: 1px;
-  margin: 4rem 0;
-  border: 0;
-  background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
-  background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
-  background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
-  background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
-}
-
 h1 {
     position: relative;
     background: #b0d5de;
@@ -65,7 +55,7 @@ h1 {
     margin-left: -1.4rem;
     border-bottom-color: #b0d5de;
     bottom: 100%;
-    left: 79%;
+    left: 82%;
 }
 
 }
@@ -122,6 +112,17 @@ textarea {
 table th {
   padding-right: 20px;
   text-align: right;
+}
+
+.line_area {
+  margin: 3rem;
+  text-align: center;
+}
+
+.line_image {
+  width: 60rem;
+  margin: 0 auto;
+  filter: brightness(0.65);
 }
 
 .center {

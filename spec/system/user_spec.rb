@@ -1,10 +1,5 @@
 require 'rails_helper'
-RSpec.describe 'ユーザー登録・ログイン・ログアウト・会員機能', type: :system do
-  # before do
-  #   @customer_user = FactoryBot.create(:customer_user)
-  #   @courier_user = FactoryBot.create(:courier_user)
-  # end
-
+RSpec.describe "ユーザー登録・ログイン・ログアウト機能", type: :system do
   def customer_login
     visit new_user_session_path
     fill_in 'Eメール', with: 'customer@sample.com'
@@ -19,10 +14,9 @@ RSpec.describe 'ユーザー登録・ログイン・ログアウト・会員機�
     click_button 'ログイン'
   end
 
-  describe 'ユーザー登録のテスト' do
-    context 'ユーザーのデータがなくログインしていない状態' do
-      # 原因不明エラーが出る
-      it 'カスタマーユーザー新規登録のテスト' do
+  describe "ユーザー登録のテスト" do
+    context "ユーザーのデータがなくログインしていない状態" do
+      it "カスタマーユーザー新規登録のテスト" do
         visit new_user_registration_path
         fill_in 'user[family_name]', with: 'サンプル'
         fill_in 'user[first_name]', with: '花子'
@@ -36,13 +30,14 @@ RSpec.describe 'ユーザー登録・ログイン・ログアウト・会員機�
         click_button 'アカウント登録'
 
         visit letter_opener_web_path
+        # binding.irb
 
-        click_on 'メールアドレスの確認'
+        click_link 'メールアドレスの確認'
 
         expect(page).to have_content 'アカウント登録が完了しました。'
       end
 
-      it '配達員ユーザー新規登録のテスト' do
+      it "配達員ユーザー新規登録のテスト" do
         visit new_user_registration_path
         fill_in 'user[family_name]', with: '配達'
         fill_in 'user[first_name]', with: '太郎'
@@ -57,24 +52,135 @@ RSpec.describe 'ユーザー登録・ログイン・ログアウト・会員機�
 
         visit letter_opener_web_path
 
-        click_on 'メールアドレスの確認'
+        click_link 'メールアドレスの確認'
 
         expect(page).to have_content 'アカウント登録が完了しました。'
       end
 
-    it 'ログインしていない状態でマイページに入ろうとするとログイン画面に飛ぶテスト' do
-      visit home_path
-      expect(current_path).to eq new_user_session_path
+      it "ログインしていない状態でマイページに入ろうとするとログイン画面に飛ぶテスト" do
+        @customer_user = FactoryBot.create(:customer_user)
+        visit home_path
+        expect(current_path).to eq new_user_session_path
+      end
     end
   end
 
-  describe 'セッション機能のテスト' do
+  describe "セッション機能のテスト" do
+    before do
+      @customer_user = FactoryBot.create(:customer_user)
+      customer_login
+    end
 
-    context 'ログインしていない状態でユーザーのデータがある場合'
-      it 'ログインができること' do
-        customer_login
-
+    context "ログインしていない状態でユーザーのデータがある場合" do
+      it "ログインができること" do
         expect(page).to have_content 'ログインしました。'
+      end
+    end
+
+    context "会員がログインしている状態" do
+      it "ログアウトができること" do
+        click_link 'ログアウト'
+        page.driver.browser.switch_to.alert.accept
+        expect(current_page).to eq root_path
+      end
+    end
+  end
+
+  describe "ユーザー情報編集・削除機能" do
+    before do
+      @customer_user = FactoryBot.create(:customer_user)
+      customer_login
+    end
+
+    context "ログインしている状態で会員情報が編集できること" do
+      it "会員情報が更新されマイページに戻ること" do
+        visit edit_user_registration_path
+        fill_in '住所', with: '変更'
+        fill_in '現在のパスワード', with: 'password'
+        click_button '更新'
+        expect(page).to have_content 'アカウント情報を変更しました。'
+      end
+    end
+
+    context "ログインしている状態でアカウント削除ができること" do
+      it "アカウントが削除されindex画面に戻ること" do
+        visit edit_user_registration_path
+        click_button 'アカウント削除'
+        page.driver.browser.switch_to.alert.accept
+        expect(page).to have_content 'アカウントを削除しました。'
+      end
+    end
+  end
+
+  describe "カスタマーユーザーでログインしているときの機能" do
+    before do
+      @customer_user = FactoryBot.create(:customer_user)
+      @courier_user = FactoryBot.create(:courier_user)
+      @customer_user2 = FactoryBot.create(:customer_user2)
+      @order1 = FactoryBot.create(:order1)
+      customer_login
+    end
+
+    context "依頼一覧画面" do
+      it "カスタマーは依頼一覧画面にアクセスできないこと" do
+        visit orders_path
+        expect(current_user).to eq root_path
+      end
+    end
+
+    context "依頼詳細画面" do
+      it "他人の依頼詳細画面にアクセスできないこと" do
+        visit edit_order_path(id: 1)
+        expect(current_page).to eq root_path
+      end
+    end
+
+    context "会話画面" do
+      it "他人の依頼メッセージ画面にアクセスできないこと" do
+        @conversation1 = FactoryBot.create(:conversation1)
+        @message1 = FactoryBot.create(:message1)
+
+        visit conversation_messages_path(id: 1)
+        expect(current_page).to eq root_path
+      end
+    end
+  end
+
+  describe "配達員ユーザーでログインしているときの機能" do
+    before do
+      @customer_user = FactoryBot.create(:customer_user)
+      @courier_user = FactoryBot.create(:courier_user)
+      @courier_user2 = FactoryBot.create(:courier_user2)
+      @order2 = FactoryBot.create(:order2)
+      courier_login
+    end
+
+    context "新規依頼作成画面" do
+      it "配達員は新規依頼作成画面にアクセスできないこと" do
+        visit new_order_path
+        expect(current_page).to eq root_path
+      end
+    end
+
+    context "依頼詳細画面" do
+      it "他人が受けた依頼詳細画面にアクセスできないこと" do
+        visit edit_order_path(id: 2)
+        expect(current_page).to eq root_path
+      end
+
+      it "依頼期限が過ぎた依頼詳細画面にアクセスできないこと" do
+        @order3 = FactoryBot.create(:order3)
+        visit edit_order_path(id: 3)
+      end
+    end
+
+    context "会話画面" do
+      it "他人のメッセージ画面にアクセスできないこと" do
+        @conversation2 = FactoryBot.create(:conversation2)
+        @message2 = FactoryBot.create(:message2)
+
+        visit conversation_messages_path(id: 2)
+        expect(current_page).to eq root_path
       end
     end
   end
