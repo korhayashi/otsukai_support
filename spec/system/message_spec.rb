@@ -32,8 +32,10 @@ RSpec.describe "メッセージ機能", type: :system do
   before do
     @customer_user = FactoryBot.create(:customer_user)
     user_confirmation
+    sleep 1
     @courier_user = FactoryBot.create(:courier_user)
     user_confirmation
+    sleep 1
     @order4 = FactoryBot.create(:order4)
   end
 
@@ -44,6 +46,7 @@ RSpec.describe "メッセージ機能", type: :system do
 
     context "メッセージを送信した場合" do
       it "チャットルームに新規メッセージが投稿され、相手が見ると既読がつくこと" do
+        sleep 1
         click_link '配達員に連絡'
         sleep 2
         fill_in 'message_body', with: 'sample'
@@ -60,6 +63,7 @@ RSpec.describe "メッセージ機能", type: :system do
         logout
 
         customer_login
+        sleep 1
         click_link '配達員に連絡'
         sleep 2
         expect(page).to have_content '既読'

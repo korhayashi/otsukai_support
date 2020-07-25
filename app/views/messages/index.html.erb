@@ -10,63 +10,14 @@
       <div class="message_page">
         <div class="form_container message_area">
           <% if @over_ten %>
-            <%= link_to '以前のメッセージ', '?m=all', class: 'old_messages' %>
+            <%= link_to 'これ以前のメッセージ', '?m=all', class: 'old_messages' %>
           <% end %>
-          <div class="ui segment message_flex">
-            <% @messages.each do |message| %>
-              <% if message.body.present? %>
-                <% if current_user.id == message.user_id %>
-                  <div class="message my_message_area">
-                    <% if message.user == current_user %>
-                      <div class="read_area">
-                        <%= '既読' if message.read %>
-                      </div>
-                    <% end %>
-                    <div class="message_item item my_message">
-                  <% else %>
-                    <div class="message auther_message_area">
-                    <%= icon 'fas', 'user-circle', class: 'user_icon message_user_icon' %>
-                    <div class="message_item item auther_message">
-                  <% end %>
-                    <div class="content">
-                      <div class="message_header">
-                        <span class="message_header_name">
-                          <%= message.user.family_name %>
-                          <%= message.user.first_name %>
-                        </span>
-                        <span class="message_header_date">
-                          <%= message.message_time %>
-                        </span>
-                      </div>
-                      <div class="list">
-                        <div class="item">
-                          <%= message.body %>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <% if current_user.id == message.user_id %>
-                    <%= icon 'fas', 'user-circle', class: 'user_icon message_user_icon' %>
-                  <% end %>
-                </div>
-              <% end %>
-            <% end %>
+          <div id="messages_area" class="ui segment message_flex">
+            <%= render partial: 'messages/index', locals: { messages: @messages } %>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <%= form_with(model: [@conversation, @message], class: 'message_form') do |f| %>
-    <div class="message_form_container form_shadow">
-      <div class="field">
-        <%= f.text_field :body, class: "form-control message_text", placeholder: 'メッセージを入力できます' %>
-      </div>
-        <%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
-      <div class="buttonbox">
-        <%= f.button type: 'submit', class: 'message_submit_btn', value: '隠しボタン' do %>
-          <%= icon 'fas', 'paper-plane' %>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
+  <%= render partial: 'messages/form', locals: { message: @message, conversation: @conversation } %>
 </div>

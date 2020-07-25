@@ -1,0 +1,13 @@
+<%= form_with(model: [conversation, message], class: 'message_form') do |f| %>
+  <div class="message_form_container form_shadow">
+    <div class="field">
+      <%= f.text_field :body, class: "form-control message_text", placeholder: 'メッセージを入力できます' %>
+    </div>
+      <%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
+    <div class="buttonbox">
+      <%= f.button type: 'submit', class: 'message_submit_btn', value: '隠しボタン' do %>
+        <%= icon 'fas', 'paper-plane' %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

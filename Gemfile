@@ -33,6 +33,10 @@ gem 'font-awesome-sass', '~> 5.4.1'
 # sendgrid凍結のため本番環境にもletter_opener
 gem 'letter_opener_web'
 
+# 画像アップロード
+gem 'carrierwave'
+gem 'mini_magick'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Faker（ダミーデータ作成）
