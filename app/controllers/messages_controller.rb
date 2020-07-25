@@ -3,6 +3,7 @@ class MessagesController < ApplicationController
   before_action do
     @conversation = Conversation.find(params[:conversation_id])
   end
+  before_action :my_items
 
   def index
     if current_user.id == @conversation.sender_id || current_user.id == @conversation.recipient_id
@@ -25,10 +26,12 @@ class MessagesController < ApplicationController
   def create
     if current_user.id == @conversation.sender_id || current_user.id == @conversation.recipient_id
       @message = @conversation.messages.build(message_params)
-      if @message.save
-        redirect_to conversation_messages_path(@conversation)
-      else
-        render 'index'
+      respond_to do |format|
+        if @message.save
+          format.js { render :index }
+        else
+          format.html { render 'index' }
+        end
       end
     else
       redirect_to home_path
@@ -39,5 +42,12 @@ class MessagesController < ApplicationController
 
   def message_params
     params.require(:message).permit(:body, :user_id)
+  end
+
+  def my_items
+    @customer_orders0 = Order.where(customer_id: current_user.id).where(status: 0)
+    @customer_orders1 = Order.where(customer_id: current_user.id).where(status: 1)
+    @courier_orders = Order.where(courier_id: current_user.id).where(status: 1)
+    @now = DateTime.now
   end
 end

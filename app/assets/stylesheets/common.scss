@@ -31,7 +31,7 @@ ul {
 }
 
 h1 {
-  width: 95%;
+  width: 28rem;
   margin: 0 auto;
   padding: 2rem;
   position: relative;
@@ -58,7 +58,7 @@ h1 {
   margin-left: -1.4rem;
   border-bottom-color: #b0d5de;
   bottom: 100%;
-  left: 75%;
+  left: 85%;
 }
 
 }
@@ -293,30 +293,31 @@ footer {
 
 // マイページサイドメニュー
 .menu_view {
-  width: 40rem;
+  min-width: 39rem;
+  max-width: 39rem;
   min-height: 100vh;
   margin-right: 8rem;
-  padding-left: 13rem;
   background-color: #f3f3f3;
 }
 
+.menu {
+  margin: 0 auto;
+}
+
 .menu_view_user {
-  width: 60%;
   display: flex;
   flex-direction: column;
 }
 
 .menu_view_user_area {
-  width: 25rem;
-  margin: 0 auto 1.5rem auto;
+  padding-right: 7rem;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: flex-end;
   position: sticky;
 }
 
 .mypage_user_icon {
-  width: 40%;
   margin-left: 1rem;
   font-size: 5rem;
   filter: drop-shadow(0.2rem 0.2rem 0.1rem $lightgray);
@@ -334,6 +335,15 @@ footer {
   a {
     color: $gray;
   }
+}
+
+.flash_area {
+  margin-top: 1.5rem;
+  height: 12rem;
+}
+
+.sticky_parent {
+  position: sticky;
 }
 
 // マイページメニューボタン
@@ -489,7 +499,7 @@ footer {
   border-color: #f3f3f3 transparent transparent transparent;
   position: fixed;
   top: 0;
-  left: 38rem;
+  left: 39rem;
 }
 
 .form {

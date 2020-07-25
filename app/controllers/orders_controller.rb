@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:edit, :update]
   before_action :not_authorized_from_courier, only: [:new, :confirm, :create]
   before_action :not_authorized_from_customer, only: [:index, :update]
+  before_action :my_items
 
   def index
     if params[:sort_pass]
@@ -94,5 +95,12 @@ class OrdersController < ApplicationController
 
   def set_order
     @order = Order.find(params[:id])
+  end
+
+  def my_items
+    @customer_orders0 = Order.where(customer_id: current_user.id).where(status: 0)
+    @customer_orders1 = Order.where(customer_id: current_user.id).where(status: 1)
+    @courier_orders = Order.where(courier_id: current_user.id).where(status: 1)
+    @now = DateTime.now
   end
 end
