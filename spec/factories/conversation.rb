@@ -17,6 +17,6 @@ FactoryBot.define do
     id { 3 }
     sender_id { 1 }
     recipient_id { 2 }
-    order_id { 5 }
+    order_id { 4 }
   end
 end

@@ -1,5 +1,11 @@
 require 'rails_helper'
 RSpec.describe "ユーザー登録・ログイン・ログアウト機能", type: :system do
+  def user_confirmation
+    @user = User.last
+    @token = @user.confirmation_token
+    visit user_confirmation_path(confirmation_token: @token)
+  end
+
   def customer_login
     visit new_user_session_path
     fill_in 'Eメール', with: 'customer@sample.com'
@@ -8,7 +14,7 @@ RSpec.describe "ユーザー登録・ログイン・ログアウト機能", type
   end
 
   def courier_login
-    visit new_user_registration_path
+    visit new_user_session_path
     fill_in 'Eメール', with: 'courier@sample.com'
     fill_in 'パスワード', with: 'password'
     click_button 'ログイン'
@@ -29,12 +35,9 @@ RSpec.describe "ユーザー登録・ログイン・ログアウト機能", type
         choose 'カスタマー'
         click_button 'アカウント登録'
 
-        visit letter_opener_web_path
-        # binding.irb
+        user_confirmation
 
-        click_link 'メールアドレスの確認'
-
-        expect(page).to have_content 'アカウント登録が完了しました。'
+        expect(page).to have_content 'メールアドレスが確認できました。'
       end
 
       it "配達員ユーザー新規登録のテスト" do
@@ -50,11 +53,9 @@ RSpec.describe "ユーザー登録・ログイン・ログアウト機能", type
         choose '配達員'
         click_button 'アカウント登録'
 
-        visit letter_opener_web_path
+        user_confirmation
 
-        click_link 'メールアドレスの確認'
-
-        expect(page).to have_content 'アカウント登録が完了しました。'
+        expect(page).to have_content 'メールアドレスが確認できました。'
       end
 
       it "ログインしていない状態でマイページに入ろうとするとログイン画面に飛ぶテスト" do
@@ -68,6 +69,7 @@ RSpec.describe "ユーザー登録・ログイン・ログアウト機能", type
   describe "セッション機能のテスト" do
     before do
       @customer_user = FactoryBot.create(:customer_user)
+      user_confirmation
       customer_login
     end
 
@@ -80,8 +82,11 @@ RSpec.describe "ユーザー登録・ログイン・ログアウト機能", type
     context "会員がログインしている状態" do
       it "ログアウトができること" do
         click_link 'ログアウト'
-        page.driver.browser.switch_to.alert.accept
-        expect(current_page).to eq root_path
+        expect {
+        page.accept_confirm do
+          expect(current_path).to eq root_path
+        end
+        }
       end
     end
   end
@@ -89,12 +94,13 @@ RSpec.describe "ユーザー登録・ログイン・ログアウト機能", type
   describe "ユーザー情報編集・削除機能" do
     before do
       @customer_user = FactoryBot.create(:customer_user)
+      user_confirmation
       customer_login
     end
 
     context "ログインしている状態で会員情報が編集できること" do
       it "会員情報が更新されマイページに戻ること" do
-        visit edit_user_registration_path
+        click_link '会員情報編集'
         fill_in '住所', with: '変更'
         fill_in '現在のパスワード', with: 'password'
         click_button '更新'
@@ -104,10 +110,13 @@ RSpec.describe "ユーザー登録・ログイン・ログアウト機能", type
 
     context "ログインしている状態でアカウント削除ができること" do
       it "アカウントが削除されindex画面に戻ること" do
-        visit edit_user_registration_path
+        click_link '会員情報編集'
         click_button 'アカウント削除'
-        page.driver.browser.switch_to.alert.accept
-        expect(page).to have_content 'アカウントを削除しました。'
+        expect {
+        page.accept_confirm do
+          expect(page).to have_content 'アカウントを削除しました。'
+        end
+        }
       end
     end
   end
@@ -115,8 +124,11 @@ RSpec.describe "ユーザー登録・ログイン・ログアウト機能", type
   describe "カスタマーユーザーでログインしているときの機能" do
     before do
       @customer_user = FactoryBot.create(:customer_user)
+      user_confirmation
       @courier_user = FactoryBot.create(:courier_user)
+      user_confirmation
       @customer_user2 = FactoryBot.create(:customer_user2)
+      user_confirmation
       @order1 = FactoryBot.create(:order1)
       customer_login
     end
@@ -124,14 +136,14 @@ RSpec.describe "ユーザー登録・ログイン・ログアウト機能", type
     context "依頼一覧画面" do
       it "カスタマーは依頼一覧画面にアクセスできないこと" do
         visit orders_path
-        expect(current_user).to eq root_path
+        expect(current_path).to eq home_path
       end
     end
 
     context "依頼詳細画面" do
       it "他人の依頼詳細画面にアクセスできないこと" do
-        visit edit_order_path(id: 1)
-        expect(current_page).to eq root_path
+        visit edit_order_path(1)
+        expect(current_path).to eq home_path
       end
     end
 
@@ -140,8 +152,8 @@ RSpec.describe "ユーザー登録・ログイン・ログアウト機能", type
         @conversation1 = FactoryBot.create(:conversation1)
         @message1 = FactoryBot.create(:message1)
 
-        visit conversation_messages_path(id: 1)
-        expect(current_page).to eq root_path
+        visit conversation_messages_path(1)
+        expect(current_path).to eq home_path
       end
     end
   end
@@ -149,8 +161,11 @@ RSpec.describe "ユーザー登録・ログイン・ログアウト機能", type
   describe "配達員ユーザーでログインしているときの機能" do
     before do
       @customer_user = FactoryBot.create(:customer_user)
+      user_confirmation
       @courier_user = FactoryBot.create(:courier_user)
+      user_confirmation
       @courier_user2 = FactoryBot.create(:courier_user2)
+      user_confirmation
       @order2 = FactoryBot.create(:order2)
       courier_login
     end
@@ -158,19 +173,14 @@ RSpec.describe "ユーザー登録・ログイン・ログアウト機能", type
     context "新規依頼作成画面" do
       it "配達員は新規依頼作成画面にアクセスできないこと" do
         visit new_order_path
-        expect(current_page).to eq root_path
+        expect(current_path).to eq home_path
       end
     end
 
     context "依頼詳細画面" do
       it "他人が受けた依頼詳細画面にアクセスできないこと" do
-        visit edit_order_path(id: 2)
-        expect(current_page).to eq root_path
-      end
-
-      it "依頼期限が過ぎた依頼詳細画面にアクセスできないこと" do
-        @order3 = FactoryBot.create(:order3)
-        visit edit_order_path(id: 3)
+        visit edit_order_path(2)
+        expect(current_path).to eq home_path
       end
     end
 
@@ -179,8 +189,8 @@ RSpec.describe "ユーザー登録・ログイン・ログアウト機能", type
         @conversation2 = FactoryBot.create(:conversation2)
         @message2 = FactoryBot.create(:message2)
 
-        visit conversation_messages_path(id: 2)
-        expect(current_page).to eq root_path
+        visit conversation_messages_path(2)
+        expect(current_path).to eq home_path
       end
     end
   end

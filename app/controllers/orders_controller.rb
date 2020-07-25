@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:edit, :update]
   before_action :not_authorized_from_courier, only: [:new, :confirm, :create]
-  before_action :not_authorized_from_customer, only: [:update]
+  before_action :not_authorized_from_customer, only: [:index, :update]
 
   def index
     if params[:sort_pass]
@@ -45,6 +45,7 @@ class OrdersController < ApplicationController
 
   def edit
     @order = Order.find(params[:id])
+
     @order_content = @order.content.gsub(/\r\n|\r|\n/, '<br>').html_safe
     @order_note = @order.note.gsub(/\r\n|\r|\n/, '<br>').html_safe
     if current_user.category == 'カスタマー'
@@ -54,8 +55,6 @@ class OrdersController < ApplicationController
     elsif current_user.category == '配達員'
       if @order.status == '配達員決定' || @order.status == '配達完了'
         if current_user.id != @order.courier_id
-          redirect_to home_path
-        elsif @order.deadline < DateTime.now
           redirect_to home_path
         end
       end
