@@ -302,6 +302,7 @@ footer {
 
 .menu {
   margin: 0 auto;
+  position: sticky;
 }
 
 .menu_view_user {
@@ -339,11 +340,27 @@ footer {
 
 .flash_area {
   margin-top: 1.5rem;
-  height: 12rem;
 }
 
-.sticky_parent {
-  position: sticky;
+.menu_memo_image {
+  width: 270px;
+}
+
+.menu_requestings {
+  margin-top: 12rem;
+  font-size: 13px;
+  text-align: center;
+}
+
+.menu_requesting {
+  margin: 0 auto;
+  position: relative;
+}
+
+.menu_requesting_content {
+  position: absolute;
+  top: 51px;
+  left: 83px;
 }
 
 // マイページメニューボタン

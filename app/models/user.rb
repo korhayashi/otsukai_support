@@ -37,7 +37,6 @@ class User < ApplicationRecord
   enum category: {
     カスタマー: 0,
     配達員: 1,
-    # 両方: 2
   }
 
   has_many :orders

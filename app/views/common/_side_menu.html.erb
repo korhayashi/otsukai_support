@@ -27,66 +27,68 @@
       </div>
     </div>
 
-    <div class="requestings">
-      <% if current_user.category == 'カスタマー' %>
-        <% if @customer_orders0.present? %>
-          <% @customer_orders0.each do |order| %>
-            <% deadline = order.deadline.to_datetime %>
-            <% if deadline > @now %>
-              <div class="requesting">
-                <%= image_tag 'memo1.png',class: 'memo_image' %>
-                <div class="requesting_content tilt">
-                  <p class="requesting_info">依頼中の買い物</p>
-                  <div class="requesting_text">
-                    現在配達員を探しています。<br>
-                    依頼期限：<%= l order.deadline, format: :short %>
+    <% unless action_name == 'home' %>
+      <div class="menu_requestings">
+        <% if current_user.category == 'カスタマー' %>
+          <% if @customer_orders0.present? %>
+            <% @customer_orders0.each do |order| %>
+              <% deadline = order.deadline.to_datetime %>
+              <% if deadline > @now %>
+                <div class="menu_requesting">
+                  <%= image_tag 'memo4.png',class: 'menu_memo_image' %>
+                  <div class="menu_requesting_content">
+                    <p class="requesting_info">依頼中の買い物</p>
+                    <div class="requesting_text">
+                      現在配達員を探しています。<br>
+                      依頼期限：<%= l order.deadline, format: :short %>
+                    </div>
+                    <%= link_to '依頼詳細', edit_order_path(order.id), class: 'btn requesting_message_btn requesting_btn btn_shadow' %>
                   </div>
-                  <%= link_to '依頼詳細', edit_order_path(order.id), class: 'btn requesting_message_btn requesting_btn btn_shadow' %>
                 </div>
-              </div>
+              <% end %>
+            <% end %>
+          <% end %>
+          <% if @customer_orders1.present? %>
+            <% @customer_orders1.each do |order| %>
+              <% deadline = order.deadline.to_datetime %>
+              <% if deadline > @now %>
+                <div class="menu_requesting">
+                  <%= image_tag 'memo4.png', class: 'menu_memo_image' %>
+                  <div class="menu_requesting_content">
+                    <p class="requesting_info">依頼中の買い物</p>
+                    <div class="requesting_text">
+                      配達員が決まりました！<br>
+                      <%= order.courier.family_name %>が買い物・配達に伺います。
+                    </div>
+                    <%= link_to '依頼詳細', edit_order_path(order.id), class: 'btn requesting_message_btn requesting_btn btn_shadow' %>
+                    <%= link_to '配達員に連絡', conversations_path(sender_id: current_user.id, recipient_id: order.courier_id, order_id: order.id), method: :post, class: 'btn requesting_message_btn requesting_btn memo_btn_shadow' %>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% elsif current_user.category == '配達員' %>
+          <% if @courier_orders.present? %>
+            <% @courier_orders.each do |order| %>
+              <% deadline = order.deadline.to_datetime %>
+              <% if deadline > @now %>
+                <div class="menu_requesting">
+                  <%= image_tag 'memo4.png', class: 'menu_memo_image' %>
+                  <div class="menu_requesting_content">
+                    <p class="requesting_info">受託中の依頼</p>
+                    <div class="requesting_text">
+                      <%= order.customer.family_name %><%= order.customer.first_name %>様の買い物依頼<br>
+                      依頼期限：<%= l order.deadline, format: :short %>
+                    </div>
+                    <%= link_to '依頼詳細', edit_order_path(order.id), class: 'btn requesting_message_btn requesting_btn btn_shadow' %>
+                    <%= link_to 'カスタマーに連絡', conversations_path(sender_id: current_user.id, recipient_id: order.customer_id, order_id: order.id), method: :post, class: 'btn requesting_message_btn requesting_btn memo_btn_shadow' %>
+                  </div>
+                </div>
+              <% end %>
             <% end %>
           <% end %>
         <% end %>
-        <% if @customer_orders1.present? %>
-          <% @customer_orders1.each do |order| %>
-            <% deadline = order.deadline.to_datetime %>
-            <% if deadline > @now %>
-              <div class="requesting">
-                <%= image_tag 'memo1.png', class: 'memo_image' %>
-                <div class="requesting_content tilt">
-                  <p class="requesting_info">依頼中の買い物</p>
-                  <div class="requesting_text">
-                    配達員が決まりました！<br>
-                    <%= order.courier.family_name %>が買い物・配達に伺います。
-                  </div>
-                  <%= link_to '依頼詳細', edit_order_path(order.id), class: 'btn requesting_message_btn requesting_btn btn_shadow' %>
-                  <%= link_to '配達員に連絡', conversations_path(sender_id: current_user.id, recipient_id: order.courier_id, order_id: order.id), method: :post, class: 'btn requesting_message_btn requesting_btn memo_btn_shadow' %>
-                </div>
-              </div>
-            <% end %>
-          <% end %>
-        <% end %>
-      <% elsif current_user.category == '配達員' %>
-        <% if @courier_orders.present? %>
-          <% @courier_orders.each do |order| %>
-            <% deadline = order.deadline.to_datetime %>
-            <% if deadline > @now %>
-              <div class="requesting">
-                <%= image_tag 'memo1.png', class: 'memo_image' %>
-                <div class="requesting_content tilt">
-                  <p class="requesting_info">受託中の依頼</p>
-                  <div class="requesting_text">
-                    <%= order.customer.family_name %><%= order.customer.first_name %>様の買い物依頼<br>
-                    依頼期限：<%= l order.deadline, format: :short %>
-                  </div>
-                  <%= link_to '依頼詳細', edit_order_path(order.id), class: 'btn requesting_message_btn requesting_btn btn_shadow' %>
-                  <%= link_to 'カスタマーに連絡', conversations_path(sender_id: current_user.id, recipient_id: order.customer_id, order_id: order.id), method: :post, class: 'btn requesting_message_btn requesting_btn memo_btn_shadow' %>
-                </div>
-              </div>
-            <% end %>
-          <% end %>
-        <% end %>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
 </div>
