@@ -342,26 +342,6 @@
   color: $gray;
 }
 
-.mypage_user_icon {
-  margin-left: 1rem;
-  font-size: 5rem;
-  filter: drop-shadow(0.2rem 0.2rem 0.1rem $lightgray);
-}
-
-.mypage_user_category, .mypage_user_name {
-  text-align: right;
-}
-
-.mypage_user_name {
-  margin-bottom: 1rem;
-  font-size: 1.9rem;
-  font-weight: bold;
-
-  a {
-    color: $gray;
-  }
-}
-
 .requestings {
   width: 60rem;
   margin: 4rem auto 3rem auto;

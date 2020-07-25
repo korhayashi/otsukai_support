@@ -31,31 +31,34 @@ ul {
 }
 
 h1 {
-    position: relative;
-    background: #b0d5de;
-    padding: 2rem;
-    text-align: center;
-    color: #878787;
-    font-size: 1.5rem;
-    border-radius: 1.9rem;
-    -webkit-border-radius: 1.9rem;
-    -moz-border-radius: 1.9rem;
+  width: 95%;
+  margin: 0 auto;
+  padding: 2rem;
+  position: relative;
+  background: #b0d5de;
+  text-align: center;
+  color: #878787;
+  font-size: 1.5rem;
+  border-radius: 1.9rem;
+  -webkit-border-radius: 1.9rem;
+  -moz-border-radius: 1.9rem;
+  filter: drop-shadow(0.2rem 0.2rem 0.3rem $lightgray);
 
 &:after{
-    border: solid transparent;
-    content: '';
-    height: 0;
-    width: 0;
-    position: absolute;
-    border-color: rgba(92, 226, 255, 0);
-    border-top-width: 1.8rem;
-    border-bottom-width: 1.8rem;
-    border-left-width: 1.4rem;
-    border-right-width: 1.4rem;
-    margin-left: -1.4rem;
-    border-bottom-color: #b0d5de;
-    bottom: 100%;
-    left: 82%;
+  border: solid transparent;
+  content: '';
+  height: 0;
+  width: 0;
+  position: absolute;
+  border-color: rgba(92, 226, 255, 0);
+  border-top-width: 1.8rem;
+  border-bottom-width: 1.8rem;
+  border-left-width: 1.4rem;
+  border-right-width: 1.4rem;
+  margin-left: -1.4rem;
+  border-bottom-color: #b0d5de;
+  bottom: 100%;
+  left: 75%;
 }
 
 }
@@ -298,17 +301,39 @@ footer {
 }
 
 .menu_view_user {
+  width: 60%;
   display: flex;
   flex-direction: column;
 }
 
 .menu_view_user_area {
   width: 25rem;
-  margin-top: 0 auto 5rem auto;
+  margin: 0 auto 1.5rem auto;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   position: sticky;
+}
+
+.mypage_user_icon {
+  width: 40%;
+  margin-left: 1rem;
+  font-size: 5rem;
+  filter: drop-shadow(0.2rem 0.2rem 0.1rem $lightgray);
+}
+
+.mypage_user_category, .mypage_user_name {
+  text-align: right;
+}
+
+.mypage_user_name {
+  margin-bottom: 1rem;
+  font-size: 1.9rem;
+  font-weight: bold;
+
+  a {
+    color: $gray;
+  }
 }
 
 // マイページメニューボタン
