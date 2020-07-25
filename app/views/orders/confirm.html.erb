@@ -23,7 +23,18 @@
         </tr>
       </table>
 
-      <%= form_with(model: @order, local: true) do |f| %>
+      <div class="line_area">
+        <%= image_tag 'line.png', class: 'line_image' %>
+      </div>
+
+      <div class="new_order_form_address">
+        〒<%= current_user.postal_code %><br>
+        <%= current_user.address %><br>
+        <%= current_user.phone_number %>
+        <p><%= current_user.family_name %><%= current_user.first_name %>様</p>
+      </div>
+
+      <%= form_with(model: @order, local: true, class: 'confirm_form') do |f| %>
         <%= f.hidden_field :content %>
         <%= f.hidden_field :note %>
         <%= f.hidden_field :deadline %>

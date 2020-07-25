@@ -29,7 +29,9 @@
                   <td>
                     〒<%= order.customer.postal_code %><br>
                     <%= order.customer.address[0..2] %>...<br>
-                    <p class="order_history_name"><%= order.customer.family_name %><%= order.customer.first_name %>様</p>
+                    <p class="order_history_name"><%= order.customer.family_name %>
+                      <%= order.customer.first_name %>
+                      様</p>
                   </td>
                 </tr>
                 <tr>
@@ -42,7 +44,7 @@
                 </tr>
                 <tr>
                   <td colspan="2" class="table_btn">
-                    <%= link_to '依頼詳細', edit_order_path(order.id), class: 'btn requesting_message_btn requesting_btn memo_btn_shadow' %>
+                    <%= link_to '依頼詳細', edit_order_path(order.id), class: 'btn requesting_btn memo_btn_shadow' %>
                   </td>
                 </tr>
               </table>
