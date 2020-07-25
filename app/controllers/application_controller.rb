@@ -22,13 +22,13 @@ class ApplicationController < ActionController::Base
 
   def not_authorized_from_customer
     if current_user.category == 'カスタマー'
-      redirect_to root_path
+      redirect_to home_path
     end
   end
 
   def not_authorized_from_courier
     if current_user.category == '配達員'
-      redirect_to root_path
+      redirect_to home_path
     end
   end
 

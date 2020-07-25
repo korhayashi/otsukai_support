@@ -47,7 +47,9 @@
         </div>
           <p class="form_info_condition">終了期限が過ぎた時点で配送員が見つからない場合は自動キャンセルとなります</p>
 
-          <hr>
+          <div class="line_area">
+            <%= image_tag 'line.png', class: 'line_image' %>
+          </div>
 
           <p class="form_info">お届け先は以下でよろしいですか？</p>
           <div class="new_order_form_address">
@@ -57,7 +59,9 @@
             <p><%= current_user.family_name %><%= current_user.first_name %>様</p>
           </div>
 
-          <hr>
+          <div class="line_area">
+            <%= image_tag 'line.png', class: 'line_image' %>
+          </div>
 
           <div class="new_order_form_submit">
             <%= f.submit '依頼する', class: 'btn common_btn btn_shadow_dark' %>

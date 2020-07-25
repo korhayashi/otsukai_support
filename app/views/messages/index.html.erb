@@ -63,7 +63,7 @@
       </div>
         <%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
       <div class="buttonbox">
-        <%= f.button type: 'submit', class: 'message_submit_btn' do %>
+        <%= f.button type: 'submit', class: 'message_submit_btn', value: '隠しボタン' do %>
           <%= icon 'fas', 'paper-plane' %>
         <% end %>
       </div>

@@ -80,6 +80,11 @@
   box-shadow: 2px 2px 4px rgba(0,0,0,.1);
 }
 
+.order_detail_note {
+  padding-bottom: 60px;
+  position: relative;
+}
+
 .note_content {
   width: 460px;
   margin: 0 auto;
@@ -99,6 +104,14 @@
     position: relative;
     vertical-align: baseline;
   }
+}
+
+.order_id {
+  font-size: 1.4rem;
+  color: $lightgray;
+  position: absolute;
+  bottom: 10px;
+  left: 30px;
 }
 
 .postit_content {
