@@ -36,7 +36,7 @@
               <% if deadline > @now %>
                 <div class="menu_requesting">
                   <div class="menu_requesting_content">
-                    <p class="menu_requesting_info">受託中の依頼</p>
+                    <p class="menu_requesting_info">依頼中の買い物</p>
                     <div class="menu_requesting_text">
                       現在配達員を探しています。<br>
                       依頼期限：<%= l order.deadline, format: :short %>
@@ -53,7 +53,7 @@
               <% if deadline > @now %>
                 <div class="menu_requesting">
                   <div class="menu_requesting_content">
-                    <p class="menu_requesting_info">受託中の依頼</p>
+                    <p class="menu_requesting_info">依頼中の買い物</p>
                     <div class="menu_requesting_text">
                       配達員が決まりました！<br>
                       <%= order.courier.family_name %>が買い物・配達に伺います。
