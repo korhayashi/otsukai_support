@@ -6,103 +6,103 @@
   <div class="triangle"></div>
 
   <div id="bg_main" class="order_edit top_space">
-      <div class="note order_detail_note">
-        <div class="note_content order_detail_note_content">
-          <table class="note_content_table order_detail_note_content_table">
+    <div class="note order_detail_note bottom_space">
+      <div class="note_content order_detail_note_content">
+        <table class="note_content_table order_detail_note_content_table">
+          <tr>
+            <th>
+              <%= image_tag 'postit1.png', class: 'postit_image' %>
+              <p class="postit_content postit_content_shopping_list">買い物リスト</p>
+            </th>
+            <td><%= @order_content %></td>
+          </tr>
+          <tr>
+            <th>
+              <%= image_tag 'postit2.png', class: 'postit_image' %>
+              <p class="postit_content postit_content_note">備考</p>
+            </th>
+            <td><%= @order.note %></td>
+          </tr>
+          <tr>
+            <th>
+              <%= image_tag 'postit3.png', class: 'postit_image' %>
+              <p class="postit_content postit_content_address">配送先情報</p>
+            </th>
+            <td>
+              〒<%= @order.customer.postal_code %><br>
+              <%= @order.customer.address %><br>
+              <%= @order.customer.phone_number %>
+              <p><%= @order.customer.family_name %>
+                <%= @order.customer.first_name %>
+                様
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <%= image_tag 'postit4.png', class: 'postit_image' %>
+              <p class="postit_content postit_content_status">ステータス</p>
+            </th>
+            <td><%= @order.status %></td>
+          </tr>
+          <% if @order.courier.present? %>
             <tr>
               <th>
-                <%= image_tag 'postit1.png', class: 'postit_image' %>
-                <p class="postit_content postit_content_shopping_list">買い物リスト</p>
+                <%= image_tag 'postit5.png', class: 'postit_image' %>
+                <p class="postit_content postit_content_courier">配達員</p>
               </th>
-              <td><%= @order_content %></td>
+              <td><%= @order.courier.family_name %></td>
             </tr>
-            <tr>
-              <th>
-                <%= image_tag 'postit2.png', class: 'postit_image' %>
-                <p class="postit_content postit_content_note">備考</p>
-              </th>
-              <td><%= @order.note %></td>
-            </tr>
-            <tr>
-              <th>
-                <%= image_tag 'postit3.png', class: 'postit_image' %>
-                <p class="postit_content postit_content_address">配送先情報</p>
-              </th>
-              <td>
-                〒<%= @order.customer.postal_code %><br>
-                <%= @order.customer.address %><br>
-                <%= @order.customer.phone_number %>
-                <p><%= @order.customer.family_name %>
-                  <%= @order.customer.first_name %>
-                  様
-                </p>
-              </td>
-            </tr>
-            <tr>
-              <th>
-                <%= image_tag 'postit4.png', class: 'postit_image' %>
-                <p class="postit_content postit_content_status">ステータス</p>
-              </th>
-              <td><%= @order.status %></td>
-            </tr>
-            <% if @order.courier.present? %>
-              <tr>
-                <th>
-                  <%= image_tag 'postit5.png', class: 'postit_image' %>
-                  <p class="postit_content postit_content_courier">配達員</p>
-                </th>
-                <td><%= @order.courier.family_name %></td>
-              </tr>
-            <% end %>
-            <tr>
-              <% if @order.status == '依頼中' || @order.status == '配達員決定' %>
-                <th>
-                  <%= image_tag 'postit6.png', class: 'postit_image' %>
-                  <p class="postit_content postit_content_deadline">終了期限</p>
-                </th>
-                <td><%= l @order.deadline, format: :short %></td>
-              <% elsif @order.status == '配達完了' %>
-                <th>
-                  <%= image_tag 'postit6.png', class: 'postit_image' %>
-                  <p class="postit_content postit_content_completed_date">配達完了日時</p>
-                </th>
-                <td><%= l @order.completed_date, format: :short %></td>
-              <% end %>
-            </tr>
-            <tr>
-              <th>
-                <%= image_tag 'postit7.png', class: 'postit_image' %>
-                <p class="postit_content postit_content_created_at">依頼日時</p>
-              </th>
-              <td><%= l @order.created_at, format: :short %></td>
-            </tr>
-          </table>
-
-          <% if current_user.category == '配達員' %>
-            <% if @order.status == '依頼中' %>
-              <div class="note_btn_area">
-                <%= form_with(model: @order, local: true) do |f| %>
-                  <%= f.hidden_field :status, value: '配達員決定' %>
-                  <span class="memo_submit_btn">
-                    <%= f.submit '依頼受託', class: 'btn common_btn memo_btn_shadow' %>
-                  </span>
-                <% end %>
-              </div>
-            <% elsif @order.status == '配達員決定' %>
-              <div class="note_btn_area">
-                <%= form_with(model: @order, local: true) do |f| %>
-                  <%= f.hidden_field :status, value: '配達完了' %>
-                  <%= f.hidden_field :completed_date, value: DateTime.now %>
-                  <span class="memo_submit_btn">
-                    <%= f.submit '配達完了', class: 'btn common_btn memo_btn_shadow' %>
-                  </span>
-                <% end %>
-              </div>
-            <% end %>
           <% end %>
-        </div>
-        <div class="order_id">注文ID:
-          <%= @order.id %></div>
+          <tr>
+            <% if @order.status == '依頼中' || @order.status == '配達員決定' %>
+              <th>
+                <%= image_tag 'postit6.png', class: 'postit_image' %>
+                <p class="postit_content postit_content_deadline">終了期限</p>
+              </th>
+              <td><%= l @order.deadline, format: :short %></td>
+            <% elsif @order.status == '配達完了' %>
+              <th>
+                <%= image_tag 'postit6.png', class: 'postit_image' %>
+                <p class="postit_content postit_content_completed_date">配達完了日時</p>
+              </th>
+              <td><%= l @order.completed_date, format: :short %></td>
+            <% end %>
+          </tr>
+          <tr>
+            <th>
+              <%= image_tag 'postit7.png', class: 'postit_image' %>
+              <p class="postit_content postit_content_created_at">依頼日時</p>
+            </th>
+            <td><%= l @order.created_at, format: :short %></td>
+          </tr>
+        </table>
+
+        <% if current_user.category == '配達員' %>
+          <% if @order.status == '依頼中' %>
+            <div class="note_btn_area">
+              <%= form_with(model: @order, local: true) do |f| %>
+                <%= f.hidden_field :status, value: '配達員決定' %>
+                <span class="memo_submit_btn">
+                  <%= f.submit '依頼受託', class: 'btn common_btn memo_btn_shadow' %>
+                </span>
+              <% end %>
+            </div>
+          <% elsif @order.status == '配達員決定' %>
+            <div class="note_btn_area">
+              <%= form_with(model: @order, local: true) do |f| %>
+                <%= f.hidden_field :status, value: '配達完了' %>
+                <%= f.hidden_field :completed_date, value: DateTime.now %>
+                <span class="memo_submit_btn">
+                  <%= f.submit '配達完了', class: 'btn common_btn memo_btn_shadow' %>
+                </span>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
       </div>
+      <div class="order_id">注文ID:
+        <%= @order.id %></div>
+    </div>
   </div>
 </div>
