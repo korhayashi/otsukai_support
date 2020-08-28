@@ -37,10 +37,11 @@ gem 'letter_opener_web'
 gem 'carrierwave'
 gem 'mini_magick'
 
+# Faker（ダミーデータ作成）
+gem 'faker'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  # Faker（ダミーデータ作成）
-  gem 'faker'
 
   gem 'spring'
   gem 'rspec-rails'
