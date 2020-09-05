@@ -13,6 +13,7 @@
 #  encrypted_password     :string           default(""), not null
 #  family_name            :string           not null
 #  first_name             :string           not null
+#  image                  :string
 #  phone_number           :string           not null
 #  postal_code            :string           not null
 #  remember_created_at    :datetime
@@ -32,7 +33,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :confirmable
+         :recoverable, :rememberable, :validatable
 
   enum category: {
     カスタマー: 0,
@@ -46,4 +47,28 @@ class User < ApplicationRecord
   validates :postal_code, presence: true, length: { in: 1..255 }
   validates :address, presence: true, length: { in: 1..255 }
   validates :phone_number, presence: true, length: { in: 1..13 }
+
+  def self.customer
+    find_or_create_by(email: 'test@test.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.category = 'カスタマー'
+      user.family_name = 'カスタマー'
+      user.first_name = 'テスト'
+      user.postal_code = '123-4567'
+      user.address = 'テスト県テスト市'
+      user.phone_number = '090-1234-5678'
+    end
+  end
+
+  def self.courier
+    find_or_create_by(email: 'test2@test.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.category = '配達員'
+      user.family_name = '配達員'
+      user.first_name = 'テスト'
+      user.postal_code = '123-4567'
+      user.address = 'テスト県テスト市'
+      user.phone_number = '090-1234-5678'
+    end
+  end
 end

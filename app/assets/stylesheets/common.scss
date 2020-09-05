@@ -543,3 +543,32 @@ footer {
 .form {
   text-align: center;
 }
+
+.test_btn_area {
+  width: 38.5rem;
+  margin: 5rem auto;
+}
+
+.test_btn_area .test_btn {
+  padding: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: $yellow;
+  background-color: $red;
+  border: 1px solid $yellow;
+  transition: 0.3s;
+  position: relative;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:active {
+    filter: none;
+    top: 0.2rem;
+  }
+}
+
+.test_btn_left {
+  margin-right: 3rem;
+}
