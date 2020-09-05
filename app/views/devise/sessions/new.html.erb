@@ -24,6 +24,11 @@
       </div>
     <% end %>
 
+    <div class="test_btn_area">
+      <%= link_to 'ゲストログイン（カスタマー）', users_guest_customer_sign_in_path, method: :post, class: 'btn test_btn test_btn_left btn_shadow' %>
+      <%= link_to 'ゲストログイン（配達員）', users_guest_courier_sign_in_path, method: :post, class: 'btn test_btn btn_shadow' %>
+    </div>
+
     <div class="form_info">
       <%= render "devise/shared/links" %>
     </div>

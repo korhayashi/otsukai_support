@@ -18,6 +18,18 @@ class Users::SessionsController < Devise::SessionsController
   #   super
   # end
 
+  def guest_customer
+    user = User.customer
+    sign_in user
+    redirect_to home_path, notice: "カスタマーテストユーザーでログインしました！"
+  end
+
+  def guest_courier
+    user = User.courier
+    sign_in user
+    redirect_to home_path, notice: "カスタマーテストユーザーでログインしました！"
+  end
+
   # protected
 
   # If you have extra params to permit, append them to the sanitizer.
