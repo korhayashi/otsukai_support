@@ -15,7 +15,11 @@
           </div>
         </div>
         <div class="mypage_user_icon">
-          <%= icon 'fas', 'user-circle', class: 'user_icon mypage_user_icon' %>
+          <% if current_user.icon.present? %>
+            <%= image_tag current_user.icon.url, class: 'user_icon_image mypage_user_icon_common mypage_user_icon_image' %>
+          <% else %>
+            <%= icon 'fas', 'user-circle', class: 'user_icon mypage_user_icon_common mypage_user_icon' %>
+          <% end %>
         </div>
       </div>
       <div class= flash_area>

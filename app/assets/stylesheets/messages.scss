@@ -171,9 +171,19 @@
   }
 }
 
+.message_user_icon_common {
+  align-self: flex-start;
+  filter: drop-shadow(0.2rem 0.2rem 0.1rem $gray);
+}
+
 .message .message_user_icon {
   font-size: 5rem;
-  align-self: flex-start;
+}
+
+.message .message_user_icon_image {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
 }
 
 .read_area {

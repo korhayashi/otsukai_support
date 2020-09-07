@@ -13,7 +13,7 @@
 #  encrypted_password     :string           default(""), not null
 #  family_name            :string           not null
 #  first_name             :string           not null
-#  image                  :string
+#  icon                   :string
 #  phone_number           :string           not null
 #  postal_code            :string           not null
 #  remember_created_at    :datetime
@@ -71,4 +71,6 @@ class User < ApplicationRecord
       user.phone_number = '090-1234-5678'
     end
   end
+
+  mount_uploader :icon, ImageUploader
 end
