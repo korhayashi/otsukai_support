@@ -5,21 +5,9 @@ class ApplicationController < ActionController::Base
 
   protected
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:category])
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:family_name])
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name])
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:postal_code])
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:address])
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:phone_number])
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:admin])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:category, :family_name, :first_name, :postal_code, :address, :phone_number, :admin])
 
-    devise_parameter_sanitizer.permit(:account_update, keys: [:category])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:family_name])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:first_name])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:postal_code])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:address])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:phone_number])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:admin])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:category, :family_name, :first_name, :postal_code, :address, :phone_number, :admin, :icon])
   end
 
   def not_authorized_from_customer

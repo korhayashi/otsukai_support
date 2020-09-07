@@ -39,6 +39,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
+  def icon_edit
+    @user = current_user
+    @customer_orders0 = Order.where(customer_id: current_user.id).where(status: 0)
+    @customer_orders1 = Order.where(customer_id: current_user.id).where(status: 1)
+    @courier_orders = Order.where(courier_id: current_user.id).where(status: 1)
+    @now = DateTime.now
+  end
+
   def check_guest
     if resource.email == 'test@test.com' || resource.email == 'test2@test.com'
       redirect_to home_path, alert: 'ゲストユーザーは編集・削除できません！'
@@ -66,4 +74,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  def update_resource(resource, params)
+    resource.update_without_password(params)
+  end
 end

@@ -1,0 +1,47 @@
+<div id="kirehashi"></div>
+<%= render 'common/menu_btn' %>
+
+<div id="main_container" class="flex">
+  <%= render 'common/side_menu' %>
+  <div class="triangle"></div>
+
+  <div id="bg_main" class="top_space">
+    <div class="form_container">
+      <%= form_with model: current_user, url: user_registration_path, local: true do |f| %>
+        <div class="icon_edit_form">
+          <label class="icon_edit_area">
+            <% if @user.icon.present? %>
+              <%= image_tag current_user.icon.url, id: 'preview', class: 'user_icon_image edit_user_icon_image' %>
+            <% else %>
+              <%= image_tag 'noimage.png', id: 'preview', class: 'user_icon_image edit_user_icon_image' %>
+            <% end %>
+            <%= f.file_field :icon, accept: 'image/*', onchange: 'previewImage(this);', class: 'hidden' %>
+          </label>
+        </div>
+        <% if @user.errors.any? %>
+          <div id="error_explanation">
+            <ul>
+              <% @user.errors.full_messages.each do |message| %>
+                <li class="icon_msg"><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="actions">
+          <%= f.submit '変更', class: 'btn common_btn user_submit_btn' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <script>
+  function previewImage(obj)
+  {
+  	var fileReader = new FileReader();
+  	fileReader.onload = (function() {
+  		document.getElementById('preview').src = fileReader.result;
+  	});
+  	fileReader.readAsDataURL(obj.files[0]);
+  }
+  </script>
+</div>

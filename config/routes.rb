@@ -5,11 +5,11 @@
 #             new_user_session GET    /users/sign_in(.:format)                                                                 devise/sessions#new
 #                 user_session POST   /users/sign_in(.:format)                                                                 devise/sessions#create
 #         destroy_user_session DELETE /users/sign_out(.:format)                                                                devise/sessions#destroy
-#            new_user_password GET    /users/password/new(.:format)                                                            devise/passwords#new
-#           edit_user_password GET    /users/password/edit(.:format)                                                           devise/passwords#edit
-#                user_password PATCH  /users/password(.:format)                                                                devise/passwords#update
-#                              PUT    /users/password(.:format)                                                                devise/passwords#update
-#                              POST   /users/password(.:format)                                                                devise/passwords#create
+#            new_user_password GET    /users/password/new(.:format)                                                            users/passwords#new
+#           edit_user_password GET    /users/password/edit(.:format)                                                           users/passwords#edit
+#                user_password PATCH  /users/password(.:format)                                                                users/passwords#update
+#                              PUT    /users/password(.:format)                                                                users/passwords#update
+#                              POST   /users/password(.:format)                                                                users/passwords#create
 #     cancel_user_registration GET    /users/cancel(.:format)                                                                  users/registrations#cancel
 #        new_user_registration GET    /users/sign_up(.:format)                                                                 users/registrations#new
 #       edit_user_registration GET    /users/edit(.:format)                                                                    users/registrations#edit
@@ -19,6 +19,7 @@
 #                              POST   /users(.:format)                                                                         users/registrations#create
 #                      sign_in GET    /sign_in(.:format)                                                                       users/sessions#new
 #                     sign_out GET    /sign_out(.:format)                                                                      users/sessions#destroy
+#         users_user_icon_edit GET    /users/user_icon_edit(.:format)                                                          users/registrations#icon_edit
 # users_guest_customer_sign_in POST   /users/guest_customer_sign_in(.:format)                                                  users/sessions#guest_customer
 #  users_guest_courier_sign_in POST   /users/guest_courier_sign_in(.:format)                                                   users/sessions#guest_courier
 #                         root GET    /                                                                                        contents#index
@@ -70,6 +71,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     get "sign_in", to: "users/sessions#new"
     get "sign_out", to: "users/sessions#destroy"
+    get 'users/user_icon_edit', to: 'users/registrations#icon_edit'
     post 'users/guest_customer_sign_in', to: 'users/sessions#guest_customer'
     post 'users/guest_courier_sign_in', to: 'users/sessions#guest_courier'
   end

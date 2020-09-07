@@ -8,6 +8,15 @@
   <div id="bg_main" class="top_space">
     <%= render "devise/shared/error_messages", resource: resource %>
     <div class="form_container">
+      <%= link_to users_user_icon_edit_path, class: 'user_icon_edit_link' do %>
+        <% if current_user.icon.present? %>
+          <%= image_tag current_user.icon.url, class: 'user_icon_image edit_user_icon_image edit_user_icon_area' %>
+        <% else %>
+          <%= image_tag 'noimage.png', id: 'preview', class: 'user_icon_image edit_user_icon_image edit_user_icon_area' %>
+        <% end %>
+        <div class="icon_change">アイコン変える？</div>
+      <% end %>
+
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'user_form' }) do |f| %>
         <div class="field">
           <%= f.label :family_name, 'お名前', class: 'form_info' %><br />
@@ -51,11 +60,6 @@
         <div class="field">
           <%= f.label :password_confirmation, class: 'form_info' %><br />
           <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-        </div>
-
-        <div class="field">
-          <%= f.label :current_password, class: 'form_info' %> <i class="form_info_condition">(<%= t('.we_need_your_current_password_to_confirm_your_changes') %>)</i><br />
-          <%= f.password_field :current_password, autocomplete: "current-password" %>
         </div>
 
         <div class="actions">
