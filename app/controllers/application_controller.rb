@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:category, :family_name, :first_name, :postal_code, :address, :phone_number, :admin])
 
-    devise_parameter_sanitizer.permit(:account_update, keys: [:category, :family_name, :first_name, :postal_code, :address, :phone_number, :admin, :icon])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:category, :family_name, :first_name, :postal_code, :address, :phone_number, :admin, :icon, :icon_cache])
   end
 
   def not_authorized_from_customer
